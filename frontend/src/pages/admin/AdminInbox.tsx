@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { Inbox, Briefcase, LogOut, Download, Mail, Phone, RefreshCw } from "lucide-react";
-import { apiGet, apiPost } from "@/lib/api";
+import { apiGet, apiPost, apiPatch } from "@/lib/api";
 import { useAdmin } from "@/pages/admin/AdminLogin";
 
 interface Enquiry {
@@ -15,8 +16,16 @@ interface Enquiry {
   location?: string | null;
   requirement?: string | null;
   message: string;
+  status: EnquiryStatus;
   created_at: string;
 }
+
+type EnquiryStatus = "new" | "contacted" | "closed";
+const STATUSES: { key: EnquiryStatus; label: string; cls: string }[] = [
+  { key: "new", label: "New", cls: "bg-ember text-white" },
+  { key: "contacted", label: "Contacted", cls: "bg-forest text-paper" },
+  { key: "closed", label: "Closed", cls: "bg-ink/10 text-ink/60" },
+];
 
 interface Application {
   id: string;
@@ -42,9 +51,22 @@ export default function AdminInbox() {
   const nav = useNavigate();
   const qc = useQueryClient();
   const [tab, setTab] = useState<Tab>("enquiries");
+  const [statusFilter, setStatusFilter] = useState<EnquiryStatus | "all">("all");
 
   const enquiries = useQuery({ queryKey: ["enquiries"], queryFn: () => apiGet<Enquiry[]>("/enquiries"), enabled: !!admin.data });
   const applications = useQuery({ queryKey: ["applications"], queryFn: () => apiGet<Application[]>("/applications"), enabled: !!admin.data });
+
+  const setStatus = useMutation({
+    mutationFn: ({ id, status }: { id: string; status: EnquiryStatus }) => apiPatch<Enquiry>(`/enquiries/${id}/status`, { status }),
+    onSuccess: (updated) => {
+      qc.setQueryData<Enquiry[]>(["enquiries"], (old) => old?.map((e) => (e.id === updated.id ? updated : e)));
+      toast.success(`Marked as ${updated.status}`);
+    },
+    onError: () => toast.error("Could not update status"),
+  });
+
+  const visibleEnquiries = enquiries.data?.filter((e) => statusFilter === "all" || e.status === statusFilter);
+  const countBy = (k: EnquiryStatus) => enquiries.data?.filter((e) => e.status === k).length ?? 0;
 
   if (admin.isLoading) return <main className="min-h-screen bg-forest" />;
   if (admin.isError) return <Navigate to="/admin/login" replace />;
@@ -86,14 +108,57 @@ export default function AdminInbox() {
 
         <div className="mt-8">
           {tab === "enquiries" ? (
-            <List items={enquiries.data} loading={enquiries.isLoading} empty="No enquiries yet." testId="admin-enquiries-list">
-              {(e) => (
-                <Card key={e.id} testId={`enquiry-${e.id}`} title={e.name} sub={[e.company, e.project_type, e.location].filter(Boolean).join(" · ")} when={e.created_at} email={e.email} phone={e.phone}>
-                  {e.requirement && <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ember">{e.requirement}</p>}
-                  <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink/75">{e.message}</p>
-                </Card>
-              )}
-            </List>
+            <>
+              <div className="mb-6 flex flex-wrap gap-2" data-testid="enquiry-status-filters">
+                {([{ key: "all", label: "All" }, ...STATUSES] as { key: EnquiryStatus | "all"; label: string }[]).map((f) => (
+                  <button
+                    key={f.key}
+                    type="button"
+                    data-testid={`enquiry-filter-${f.key}`}
+                    onClick={() => setStatusFilter(f.key)}
+                    className={`rounded-full border px-4 py-1.5 font-mono text-[10px] uppercase tracking-[0.2em] transition-colors ${
+                      statusFilter === f.key ? "border-forest bg-forest text-paper" : "border-ink/15 text-ink/60 hover:border-ember hover:text-ember"
+                    }`}
+                  >
+                    {f.label} {f.key !== "all" && <span className="ml-1 opacity-70">{countBy(f.key)}</span>}
+                  </button>
+                ))}
+              </div>
+              <List items={visibleEnquiries} loading={enquiries.isLoading} empty={statusFilter === "all" ? "No enquiries yet." : `No ${statusFilter} enquiries.`} testId="admin-enquiries-list">
+                {(e) => (
+                  <Card
+                    key={e.id}
+                    testId={`enquiry-${e.id}`}
+                    title={e.name}
+                    sub={[e.company, e.project_type, e.location].filter(Boolean).join(" · ")}
+                    when={e.created_at}
+                    email={e.email}
+                    phone={e.phone}
+                    badge={<StatusBadge status={e.status} testId={`enquiry-status-${e.id}`} />}
+                  >
+                    {e.requirement && <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ember">{e.requirement}</p>}
+                    <p className="mt-2 whitespace-pre-line text-sm leading-relaxed text-ink/75">{e.message}</p>
+                    <div className="mt-4 flex flex-wrap items-center gap-2" data-testid={`enquiry-status-actions-${e.id}`}>
+                      <span className="mr-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">Mark as</span>
+                      {STATUSES.map((st) => (
+                        <button
+                          key={st.key}
+                          type="button"
+                          disabled={e.status === st.key || setStatus.isPending}
+                          data-testid={`enquiry-set-${st.key}-${e.id}`}
+                          onClick={() => setStatus.mutate({ id: e.id, status: st.key })}
+                          className={`rounded-full border px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] transition-colors disabled:cursor-default ${
+                            e.status === st.key ? `border-transparent ${st.cls}` : "border-ink/15 text-ink/60 hover:border-ember hover:text-ember"
+                          }`}
+                        >
+                          {st.label}
+                        </button>
+                      ))}
+                    </div>
+                  </Card>
+                )}
+              </List>
+            </>
           ) : (
             <List items={applications.data} loading={applications.isLoading} empty="No applications yet." testId="admin-applications-list">
               {(a) => (
@@ -142,12 +207,20 @@ function List<T>({ items, loading, empty, testId, children }: { items?: T[]; loa
   return <div data-testid={testId} className="grid gap-4">{items.map(children)}</div>;
 }
 
-function Card({ title, sub, when, email, phone, testId, children }: { title: string; sub?: string; when: string; email: string; phone?: string | null; testId: string; children: React.ReactNode }) {
+function StatusBadge({ status, testId }: { status: EnquiryStatus; testId: string }) {
+  const st = STATUSES.find((s) => s.key === status) ?? STATUSES[0];
+  return <span data-testid={testId} className={`rounded-full px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.2em] ${st.cls}`}>{st.label}</span>;
+}
+
+function Card({ title, sub, when, email, phone, testId, badge, children }: { title: string; sub?: string; when: string; email: string; phone?: string | null; testId: string; badge?: React.ReactNode; children: React.ReactNode }) {
   return (
     <article data-testid={testId} className="rounded-2xl border border-ink/10 bg-white p-6 transition-[border-color] hover:border-ember/40 sm:p-7">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="font-heading text-lg font-extrabold uppercase tracking-tight text-ink">{title}</h2>
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 className="font-heading text-lg font-extrabold uppercase tracking-tight text-ink">{title}</h2>
+            {badge}
+          </div>
           {sub && <p className="mt-1 text-sm text-ink/55">{sub}</p>}
         </div>
         <time className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45">{fmt(when)}</time>

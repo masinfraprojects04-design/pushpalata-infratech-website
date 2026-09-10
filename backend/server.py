@@ -60,7 +60,15 @@ class EnquiryCreate(BaseModel):
 
 class Enquiry(EnquiryCreate):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    status: str = "new"
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+ENQUIRY_STATUSES = ("new", "contacted", "closed")
+
+
+class StatusUpdate(BaseModel):
+    status: str
 
 
 class Application(BaseModel):
@@ -341,15 +349,20 @@ async def create_enquiry(input: EnquiryCreate):
 
 @api_router.get("/enquiries", response_model=List[Enquiry], dependencies=[AdminDep])
 async def list_enquiries():
-    docs = await db.enquiries.find().sort("created_at", -1).to_list(1000)
-    out = []
-    for d in docs:
-        d.pop("_id", None)
-        ts = d.get("created_at")
-        if isinstance(ts, datetime) and ts.tzinfo is None:
-            d["created_at"] = ts.replace(tzinfo=timezone.utc)
-        out.append(Enquiry(**d))
-    return out
+    docs = await db.enquiries.find({}, {"_id": 0}).sort("created_at", -1).to_list(1000)
+    return [Enquiry(**d) for d in docs]
+
+
+@api_router.patch("/enquiries/{enquiry_id}/status", response_model=Enquiry, dependencies=[AdminDep])
+async def update_enquiry_status(enquiry_id: str, body: StatusUpdate):
+    if body.status not in ENQUIRY_STATUSES:
+        raise HTTPException(status_code=400, detail=f"Status must be one of {', '.join(ENQUIRY_STATUSES)}")
+    doc = await db.enquiries.find_one_and_update(
+        {"id": enquiry_id}, {"$set": {"status": body.status}}, projection={"_id": 0}, return_document=True
+    )
+    if not doc:
+        raise HTTPException(status_code=404, detail="Enquiry not found")
+    return Enquiry(**doc)
 
 
 app.include_router(api_router)

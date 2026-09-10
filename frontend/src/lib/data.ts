@@ -235,7 +235,7 @@ export interface Project {
   img: string;
   gallery?: { img: string; caption: string }[];
   highlights: { label: string; value: string }[];
-  certificate?: { issuer: string; ref: string; date: string; kind: "Experience Certificate" | "Undertaking" };
+  certificate?: { issuer: string; ref: string; date: string; kind: "Experience Certificate" | "Undertaking"; file?: string; image?: string };
 }
 
 export const PROJECTS: Project[] = [
@@ -284,7 +284,7 @@ export const PROJECTS: Project[] = [
     category: "current",
     note: "Client: Adani Transmission Ltd. PO Nos. 5704002401 (08-10-2024) & 5704003179 (27-03-2025). Tower erection quantity 9,000 MT completed + running (company undertaking dated 30 April 2025, Khavda).",
     img: IMG.towerDusk,
-    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking" },
+    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking", file: "/certificates/adani-undertaking-765kv-tower-erection.pdf", image: "/certificates/adani-undertaking-765kv-tower-erection.jpg" },
     highlights: [
       { label: "Voltage", value: "765 kV" },
       { label: "Work", value: "Tower Erection" },
@@ -304,7 +304,7 @@ export const PROJECTS: Project[] = [
     category: "current",
     note: "Client: Adani Transmission Ltd. Part of the same PO set as KPS2–Halvad (9,000 MT combined tower erection, completed + running).",
     img: IMG.towerInsulatorsSky,
-    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking" },
+    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking", file: "/certificates/adani-undertaking-765kv-tower-erection.pdf", image: "/certificates/adani-undertaking-765kv-tower-erection.jpg" },
     highlights: [
       { label: "Voltage", value: "765 kV D/C" },
       { label: "Configuration", value: "Hexa Bundle" },
@@ -322,7 +322,7 @@ export const PROJECTS: Project[] = [
     category: "current",
     note: "Client: LS Cable India Private Limited. PO No. LSCI/DVC/24-25/PIPL/001. Stringing & installation of HTLS conductor — 1.7 CKM completed.",
     img: IMG.stringingDrums,
-    certificate: { issuer: "LS Cable India Pvt. Ltd.", ref: "PO LSCI/DVC/24-25/PIPL/001", date: "30 Apr 2025", kind: "Undertaking" },
+    certificate: { issuer: "LS Cable India Pvt. Ltd.", ref: "PO LSCI/DVC/24-25/PIPL/001", date: "30 Apr 2025", kind: "Undertaking", file: "/certificates/lscable-undertaking-htls-dvc.pdf", image: "/certificates/lscable-undertaking-htls-dvc.jpg" },
     highlights: [
       { label: "Work", value: "HTLS Stringing" },
       { label: "Quantity", value: "1.7 CKM" },
@@ -348,7 +348,7 @@ export const PROJECTS: Project[] = [
       { label: "Stringing", value: "20.52 km" },
       { label: "Voltage", value: "400 kV D/C" },
     ],
-    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg C-001", date: "07 Apr 2024", kind: "Experience Certificate" },
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg C-001", date: "07 Apr 2024", kind: "Experience Certificate", file: "/certificates/sterlite-mumbai-urja-marg-400kv.pdf", image: "/certificates/sterlite-mumbai-urja-marg-400kv.jpg" },
   },
   {
     id: "vapi-sayali-220",
@@ -368,7 +368,7 @@ export const PROJECTS: Project[] = [
       { label: "Stringing", value: "15.7 km" },
       { label: "Voltage", value: "220 kV D/C" },
     ],
-    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg B-001", date: "07 Apr 2024", kind: "Experience Certificate" },
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg B-001", date: "07 Apr 2024", kind: "Experience Certificate", file: "/certificates/sterlite-vapi-sayali-220kv.pdf", image: "/certificates/sterlite-vapi-sayali-220kv.jpg" },
   },
   {
     id: "jamnagar-jamkhambaliya-400",
@@ -388,7 +388,7 @@ export const PROJECTS: Project[] = [
       { label: "Stringing", value: "20.25 km" },
       { label: "Voltage", value: "400 kV D/C" },
     ],
-    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-JKTL-002", date: "11 Apr 2024", kind: "Experience Certificate" },
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-JKTL-002", date: "11 Apr 2024", kind: "Experience Certificate", file: "/certificates/sterlite-jamnagar-jamkhambaliya-400kv.pdf", image: "/certificates/sterlite-jamnagar-jamkhambaliya-400kv.jpg" },
   },
   {
     id: "adselr-assam-substation",
@@ -407,7 +407,7 @@ export const PROJECTS: Project[] = [
       { label: "Funding", value: "AIIB" },
       { label: "Location", value: "Assam" },
     ],
-    certificate: { issuer: "Ashoka Buildcon Ltd.", ref: "Experience Certificate", date: "2024", kind: "Experience Certificate" },
+    certificate: { issuer: "Ashoka Buildcon Ltd.", ref: "Experience Certificate", date: "2024", kind: "Experience Certificate", file: "/certificates/ashoka-buildcon-adselr-substation.pdf", image: "/certificates/ashoka-buildcon-adselr-substation.jpg" },
   },
   {
     id: "chittorgarh-ajmer-765",
@@ -419,7 +419,7 @@ export const PROJECTS: Project[] = [
     lineType: "Double Circuit",
     scope: ["Transmission-line execution according to awarded subcontract scope"],
     category: "subcontract",
-    img: IMG.towerSky,
+    img: IMG.towerDusk,
     highlights: [
       { label: "Voltage", value: "765 kV D/C" },
       { label: "Period", value: "2014–2016" },
@@ -435,7 +435,7 @@ export const PROJECTS: Project[] = [
     role: "Subcontractor",
     scope: ["Foundation", "Tower erection"],
     category: "subcontract",
-    img: IMG.pylonField,
+    img: IMG.foundationConcreting,
     highlights: [
       { label: "Period", value: "2016–2017" },
       { label: "Location", value: "Gujarat" },
@@ -453,7 +453,7 @@ export const PROJECTS: Project[] = [
     lineType: "Double Circuit",
     scope: ["Foundation", "Tower erection", "Stringing"],
     category: "subcontract",
-    img: IMG.towerBlack,
+    img: IMG.stringingTower,
     highlights: [
       { label: "Voltage", value: "400 kV D/C" },
       { label: "Period", value: "2017–2018" },
@@ -469,7 +469,7 @@ export const PROJECTS: Project[] = [
     role: "Subcontractor",
     scope: ["Tower erection"],
     category: "subcontract",
-    img: IMG.lattice,
+    img: IMG.towerInsulatorsSky,
     highlights: [
       { label: "Period", value: "2018–2019" },
       { label: "Location", value: "Madhya Pradesh" },
@@ -487,7 +487,7 @@ export const PROJECTS: Project[] = [
     lineType: "Double Circuit",
     scope: ["Tower erection"],
     category: "subcontract",
-    img: IMG.sunsetPost,
+    img: IMG.towerErectionProgress,
     highlights: [
       { label: "Voltage", value: "765 kV D/C" },
       { label: "Period", value: "2020–2021" },
@@ -504,7 +504,7 @@ export const PROJECTS: Project[] = [
     voltage: "765 kV / 400 kV according to package",
     scope: ["Tower erection"],
     category: "subcontract",
-    img: IMG.citySunset,
+    img: IMG.towerErectedCrew,
     highlights: [
       { label: "Voltage", value: "765 / 400 kV" },
       { label: "Period", value: "2021–2022" },
@@ -522,7 +522,7 @@ export const PROJECTS: Project[] = [
     lineType: "Double Circuit",
     scope: ["Transmission-line execution"],
     category: "subcontract",
-    img: IMG.nightYard,
+    img: IMG.stringingPuller,
     highlights: [
       { label: "Voltage", value: "765 kV D/C" },
       { label: "Period", value: "2022–2023" },

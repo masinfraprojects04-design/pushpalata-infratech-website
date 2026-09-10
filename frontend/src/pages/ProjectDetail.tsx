@@ -1,8 +1,9 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, Zap, Check, BadgeCheck } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, Zap, Check } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { Reveal, PageHero, CTALink } from "@/components/site/Shared";
 import { SiteGallery } from "@/components/site/SiteGallery";
+import { CertificateBlock } from "@/components/site/CertificateBlock";
 
 const CATEGORY_LABEL: Record<string, string> = {
   epc: "Current Full EPC Project",
@@ -56,17 +57,7 @@ export default function ProjectDetail() {
               </div>
             </Reveal>
 
-            {project.certificate && (
-              <Reveal delay={0.1}>
-                <div data-testid="project-certificate" className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 rounded-2xl border border-ember/40 bg-ember/5 p-6">
-                  <span className="inline-flex items-center gap-2 font-heading text-sm font-extrabold uppercase tracking-tight text-forest">
-                    <BadgeCheck className="h-5 w-5 text-ember" /> {project.certificate.kind}
-                  </span>
-                  <span className="text-sm text-ink/70">Issued by <strong className="text-ink">{project.certificate.issuer}</strong></span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50">Ref {project.certificate.ref} · {project.certificate.date}</span>
-                </div>
-              </Reveal>
-            )}
+            {project.certificate && <CertificateBlock cert={project.certificate} name={project.name} />}
 
             <Reveal delay={0.12}>
               <h2 className="mt-12 font-heading text-xl font-extrabold uppercase tracking-tight text-ink">
