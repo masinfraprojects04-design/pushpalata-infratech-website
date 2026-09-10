@@ -17,7 +17,7 @@ Build a complete, premium, modern corporate website for Pushpalata Infratech Pri
 Pages: Home, About Us, Services (+ detail template), Projects (+ detail template), EPC Capabilities, Our Experience, Quality & HSE, Careers, Contact. Sticky compacting navbar with orange "Request a Project Discussion" CTA; mobile hamburger overlay; footer with quick links/services/corporate info. SEO title/meta per brief.
 
 ## Implemented (2026-09-10)
-- Real company PLP logo (recreated hi-res from client's uploaded mark) wired into navbar, footer and favicon
+- Real company PLP logo wired into navbar, footer and favicon. (Sep 2026) User asked to use the original red PLP mark AS-IS — original scan is now used directly (only frame trimmed + white bg made transparent, no AI redraw). Do NOT regenerate/redraw the logo.
 - Enquiry email alerts: every POST /api/enquiries also emails info@pushpalatainfratech.com via Emergent-managed Resend proxy (guardrail-gated template; email failure never blocks enquiry saving — logged only)
 - Legal pages: /privacy-policy and /terms-and-conditions with footer links wired
 - Kinetic hero: parallax 765 kV imagery, masked line-by-line headline reveal, CTAs, scroll indicator
