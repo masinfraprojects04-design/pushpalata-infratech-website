@@ -3,6 +3,7 @@ import { ArrowLeft, Check } from "lucide-react";
 import { SERVICES } from "@/lib/data";
 import { Reveal, PageHero, CTALink } from "@/components/site/Shared";
 import { FieldVideo } from "@/components/site/FieldVideo";
+import { SiteGallery } from "@/components/site/SiteGallery";
 
 export default function ServiceDetail() {
   const { slug } = useParams();
@@ -14,6 +15,7 @@ export default function ServiceDetail() {
     <main data-testid="service-detail-page">
       <PageHero eyebrow="Service Capability" title={service.title} description={service.short} img={service.img} />
       {service.video && <FieldVideo id={service.video} no="01" light />}
+      {service.gallery && <SiteGallery no="01" items={service.gallery} light />}
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-3">
           <div className="lg:col-span-2">

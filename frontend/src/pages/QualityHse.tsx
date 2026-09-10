@@ -30,9 +30,9 @@ const GALLERY = [
   { img: IMG.stringingPuller, caption: "Tension stringing operations" },
   { img: IMG.lattice, caption: "Tower climbing & erection" },
   { img: IMG.stringingTower, caption: "Inspection & supervision" },
-  { img: IMG.lineDirt, caption: "Foundation quality checks" },
-  { img: IMG.crewOrange, caption: "Site discipline" },
-  { img: IMG.siteGate, caption: "Controlled site access" },
+  { img: IMG.foundationCubeTest, caption: "Foundation quality checks" },
+  { img: IMG.foundationToolbox, caption: "Toolbox talks & PPE" },
+  { img: IMG.foundationCement, caption: "Material verification" },
 ];
 
 export default function QualityHse() {

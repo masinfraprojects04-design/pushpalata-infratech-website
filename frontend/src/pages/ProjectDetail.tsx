@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { ArrowLeft, MapPin, Calendar, Zap, Check } from "lucide-react";
 import { PROJECTS } from "@/lib/data";
 import { Reveal, PageHero, CTALink } from "@/components/site/Shared";
+import { SiteGallery } from "@/components/site/SiteGallery";
 
 const CATEGORY_LABEL: Record<string, string> = {
   epc: "Current Full EPC Project",
@@ -18,6 +19,7 @@ export default function ProjectDetail() {
   return (
     <main data-testid="project-detail-page">
       <PageHero eyebrow={CATEGORY_LABEL[project.category]} title={project.name} img={project.img} />
+      {project.gallery && <SiteGallery no="01" label="Progress Photos From Site" items={project.gallery} light />}
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
         <div className="grid gap-14 lg:grid-cols-3">

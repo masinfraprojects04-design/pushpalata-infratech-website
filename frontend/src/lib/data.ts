@@ -37,7 +37,20 @@ export const IMG = {
   stringingTensioner: "/media/stringing-tensioner.jpg",
   stringingPuller: "/media/stringing-puller.jpg",
   stringingTower: "/media/stringing-tower.jpg",
+  foundationToolbox: "/media/foundation-toolbox-talk.jpg",
+  foundationCement: "/media/foundation-cement-stock.jpg",
+  foundationExcavation: "/media/foundation-excavation.jpg",
+  foundationCubeTest: "/media/foundation-cube-test.jpg",
+  surveyTotalStation: "/media/survey-total-station.jpg",
 } as const;
+
+export const FOUNDATION_GALLERY = [
+  { img: "/media/foundation-excavation.jpg", caption: "Foundation pit excavation — JCB 3DX" },
+  { img: "/media/survey-total-station.jpg", caption: "Total-station survey & tower spotting" },
+  { img: "/media/foundation-cement-stock.jpg", caption: "Cement stock verification at site" },
+  { img: "/media/foundation-cube-test.jpg", caption: "Concrete cube test — 2000 kN CTM" },
+  { img: "/media/foundation-toolbox-talk.jpg", caption: "Morning toolbox talk & PPE check" },
+];
 
 export const FIELD_VIDEO = {
   stringing: {
@@ -64,6 +77,7 @@ export interface Service {
   intro: string;
   points: string[];
   video?: keyof typeof FIELD_VIDEO;
+  gallery?: { img: string; caption: string }[];
 }
 
 export const SERVICES: Service[] = [
@@ -130,10 +144,11 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "foundation-civil-works",
+    gallery: FOUNDATION_GALLERY,
     title: "Foundation & Civil Works",
     short: "Transmission tower foundations, excavation, reinforcement, concreting, benching, protection works and associated civil activities.",
     icon: Layers,
-    img: IMG.lattice,
+    img: IMG.foundationExcavation,
     intro:
       "Complete tower foundation execution — from excavation and reinforcement through concreting, benching and protection of tower footings.",
     points: [
@@ -163,7 +178,7 @@ export const SERVICES: Service[] = [
     title: "Survey & Transmission Engineering",
     short: "Transmission-line survey activities and engineering support including PLS-CADD / PLS Profile-related workflows and project management support.",
     icon: Compass,
-    img: IMG.towerBlack,
+    img: IMG.surveyTotalStation,
     intro:
       "Route survey and engineering support feeding the design and execution chain — alignment, profiling and digital documentation workflows.",
     points: [
@@ -204,6 +219,7 @@ export interface Project {
   category: ProjectCategory;
   note?: string;
   img: string;
+  gallery?: { img: string; caption: string }[];
   highlights: { label: string; value: string }[];
 }
 
@@ -234,6 +250,7 @@ export const PROJECTS: Project[] = [
     category: "epc",
     note: "Current flagship EPC project. Service order effective 11 November 2025. Project reference AP1/0 to AP14/0.",
     img: IMG.corridor,
+    gallery: FOUNDATION_GALLERY,
     highlights: [
       { label: "Approx. Length", value: "35 km" },
       { label: "Voltage", value: "765 kV D/C" },
