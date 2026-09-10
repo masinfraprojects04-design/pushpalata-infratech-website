@@ -15,6 +15,7 @@ import Experience from "@/pages/Experience";
 import QualityHse from "@/pages/QualityHse";
 import Careers from "@/pages/Careers";
 import Contact from "@/pages/Contact";
+import LegalPage, { PRIVACY_SECTIONS, TERMS_SECTIONS } from "@/pages/Legal";
 
 function ScrollManager() {
   const { pathname } = useLocation();
@@ -55,6 +56,8 @@ export default function App() {
         <Route path="/quality-hse" element={<QualityHse />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/privacy-policy" element={<LegalPage eyebrow="Legal" title="Privacy Policy" sections={PRIVACY_SECTIONS} testId="privacy-policy-page" />} />
+        <Route path="/terms-and-conditions" element={<LegalPage eyebrow="Legal" title="Terms & Conditions" sections={TERMS_SECTIONS} testId="terms-page" />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

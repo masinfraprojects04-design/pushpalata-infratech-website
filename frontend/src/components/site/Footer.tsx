@@ -115,12 +115,12 @@ export default function Footer() {
             © {new Date().getFullYear()} Pushpalata Infratech Private Limited. All Rights Reserved.
           </p>
           <div className="flex items-center gap-6">
-            <span data-testid="footer-privacy" className="cursor-pointer text-xs text-paper/45 transition-colors hover:text-ember">
+            <Link to="/privacy-policy" data-testid="footer-privacy" className="text-xs text-paper/45 transition-colors hover:text-ember">
               Privacy Policy
-            </span>
-            <span data-testid="footer-terms" className="cursor-pointer text-xs text-paper/45 transition-colors hover:text-ember">
+            </Link>
+            <Link to="/terms-and-conditions" data-testid="footer-terms" className="text-xs text-paper/45 transition-colors hover:text-ember">
               Terms & Conditions
-            </span>
+            </Link>
           </div>
         </div>
       </div>
