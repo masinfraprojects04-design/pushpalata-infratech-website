@@ -33,6 +33,26 @@ export const IMG = {
   crew: "https://images.unsplash.com/photo-1768926968986-a88590ce5025?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1400",
   crewOrange: "https://images.unsplash.com/photo-1593812725955-6d89f01ded2d?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1400",
   siteGate: "https://images.unsplash.com/photo-1593812742588-92d10d2f2e1c?crop=entropy&cs=srgb&fm=jpg&ixlib=rb-4.1.0&q=85&w=1400",
+  stringingDrums: "/media/stringing-drums.jpg",
+  stringingTensioner: "/media/stringing-tensioner.jpg",
+  stringingPuller: "/media/stringing-puller.jpg",
+  stringingTower: "/media/stringing-tower.jpg",
+} as const;
+
+export const FIELD_VIDEO = {
+  stringing: {
+    src: "/media/stringing.mp4",
+    webm: "/media/stringing.webm",
+    poster: "/media/stringing-poster.jpg",
+    title: "Tension Stringing in Progress",
+    caption: "Conductor drums, puller-tensioner set-up and stringing through the tower — live from a Pushpalata Infratech site.",
+    stills: [
+      { img: "/media/stringing-drums.jpg", caption: "Conductor drums staged at site" },
+      { img: "/media/stringing-tensioner.jpg", caption: "Puller-tensioner positioned at tower" },
+      { img: "/media/stringing-puller.jpg", caption: "Hydraulic tensioner — bull-wheel drive" },
+      { img: "/media/stringing-tower.jpg", caption: "Stringing through the lattice tower" },
+    ],
+  },
 } as const;
 
 export interface Service {
@@ -43,6 +63,7 @@ export interface Service {
   img: string;
   intro: string;
   points: string[];
+  video?: keyof typeof FIELD_VIDEO;
 }
 
 export const SERVICES: Service[] = [
@@ -96,7 +117,8 @@ export const SERVICES: Service[] = [
     title: "Stringing",
     short: "S/C, D/C and bundled conductor stringing including Hexa, Octa, Double, Quad and other configurations, as applicable to project requirements.",
     icon: Cable,
-    img: IMG.pylonField,
+    img: IMG.stringingTensioner,
+    video: "stringing",
     intro:
       "Conductor and earth-wire stringing across single and double circuit lines, including bundled configurations up to 765 kV class.",
     points: [
@@ -265,7 +287,7 @@ export const PROJECTS: Project[] = [
     scope: ["Stringing & installation of HTLS conductor"],
     category: "current",
     note: "Contracting organization: LS Cable India Private Limited. Quantity: 1.7 CKM.",
-    img: IMG.transformer,
+    img: IMG.stringingDrums,
     highlights: [
       { label: "Work", value: "HTLS Stringing" },
       { label: "Quantity", value: "1.7 CKM" },

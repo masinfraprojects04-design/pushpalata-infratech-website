@@ -33,6 +33,7 @@ Pages: Home, About Us, Services (+ detail template), Projects (+ detail template
 - Navbar brand: single-line 'PUSHPALATA INFRATECH PRIVATE LIMITED' in Roboto Slab (font-brand), dark green when scrolled / white over hero; CTA 'Contact Us'; Contact link removed from desktop nav (still in mobile menu)
 - Home CTA band button 'Start a Project Discussion' now white/forest (user asked for colour change)
 - Root + frontend eslint.config.js added only so the platform lint check can run (project lint is oxlint)
+- REAL SITE FOOTAGE (Sep 10 2026): user's WhatsApp stringing video → /public/media/stringing.mp4 + .webm (muted, ffmpeg-encoded) + 4 extracted stills (stringing-drums/tensioner/puller/tower.jpg). Data in FIELD_VIDEO (data.ts). components/site/FieldVideo.tsx = "Live From Our Sites" section (autoplay/loop/muted video + play-pause + 4 stills) on Home (#03) and /services/stringing (#01). Stringing service img, DVC HTLS project img and 2 Quality&HSE gallery tiles now use real stills. Other images still stock.
 - Careers: discipline chips, locations, ONLINE APPLICATION FORM with resume upload (PDF/DOC/DOCX ≤5MB) → POST /api/applications (multipart) → Mongo `applications` + file in /app/backend/uploads/resumes + owner email (Resend) with tokenized download link GET /api/applications/{id}/resume?token=…; mailto fallback kept
 - Contact: 2 office cards, call/WhatsApp/email strip, Google Map embed, project enquiry form persisting to MongoDB with success toast
 - Lenis smooth scrolling, lenis CSS, SEO meta in index.html

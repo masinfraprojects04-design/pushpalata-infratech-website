@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { IMG, SERVICES, PROJECTS, VOLTAGES, PARTNERS } from "@/lib/data";
 import { Reveal, MaskedLine, Counter, Marquee, CTALink, ScrollHint, Chapter } from "@/components/site/Shared";
+import { FieldVideo } from "@/components/site/FieldVideo";
 
 const KPIS = [
   { label: "Established", value: 2014, suffix: "" },
@@ -224,7 +225,7 @@ function VoltageBand() {
   return (
     <section className="cad-grid bg-forest py-24 sm:py-32" data-testid="voltage-band">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Chapter no="03" label="Transmission Voltage Capability" light />
+        <Chapter no="04" label="Transmission Voltage Capability" light />
         <Reveal>
           <h2 className="mt-8 max-w-3xl font-heading text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-paper sm:text-5xl">
             Experience Across <span className="text-ember">Multiple Voltage Levels</span>
@@ -278,7 +279,7 @@ function FlagshipProject() {
   return (
     <section className="bg-forest-2 py-24 sm:py-32" data-testid="flagship-project">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Chapter no="04" label="Current Flagship EPC Project" light />
+        <Chapter no="05" label="Current Flagship EPC Project" light />
         <div className="mt-10 grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
             <div className="relative">
@@ -332,7 +333,7 @@ function FlagshipProject() {
 function Partners() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-      <Chapter no="05" label="Selected Project Partners" />
+      <Chapter no="06" label="Selected Project Partners" />
       <Reveal>
         <h2 className="mt-8 max-w-2xl font-heading text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-ink sm:text-5xl">
           Trusted on <span className="text-ember">Major Corridors</span>
@@ -404,6 +405,7 @@ export default function Home() {
         ]}
       />
       <ServicesGrid />
+      <FieldVideo id="stringing" no="03" />
       <VoltageBand />
       <FlagshipProject />
       <Partners />

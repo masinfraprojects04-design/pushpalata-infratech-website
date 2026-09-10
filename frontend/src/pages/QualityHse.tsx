@@ -27,9 +27,9 @@ const PILLARS = [
 ];
 
 const GALLERY = [
-  { img: IMG.crew, caption: "Safety briefings & PPE" },
+  { img: IMG.stringingPuller, caption: "Tension stringing operations" },
   { img: IMG.lattice, caption: "Tower climbing & erection" },
-  { img: IMG.substation, caption: "Inspection & supervision" },
+  { img: IMG.stringingTower, caption: "Inspection & supervision" },
   { img: IMG.lineDirt, caption: "Foundation quality checks" },
   { img: IMG.crewOrange, caption: "Site discipline" },
   { img: IMG.siteGate, caption: "Controlled site access" },
