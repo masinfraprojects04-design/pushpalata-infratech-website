@@ -24,11 +24,13 @@ ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
 from lib.db import client, db, ensure_indexes
+from auth import router as auth_router, ensure_admin_user, AdminDep
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     app.state.index_task = asyncio.create_task(ensure_indexes())
+    await ensure_admin_user()
     yield
     client.close()
 
@@ -271,6 +273,23 @@ async def create_application(
     return app_obj
 
 
+@api_router.get("/applications", response_model=List[Application], dependencies=[AdminDep])
+async def list_applications():
+    docs = await db.applications.find({}, {"_id": 0, "stored_name": 0, "download_token": 0}).sort("created_at", -1).to_list(1000)
+    return [Application(**d) for d in docs]
+
+
+@api_router.get("/admin/applications/{application_id}/resume", dependencies=[AdminDep])
+async def admin_download_resume(application_id: str):
+    doc = await db.applications.find_one({"id": application_id}, {"_id": 0})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Application not found")
+    path = UPLOAD_DIR / doc["stored_name"]
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Resume file missing")
+    return FileResponse(path, filename=doc["resume_filename"])
+
+
 @api_router.get("/applications/{application_id}/resume")
 async def download_resume(application_id: str, token: str):
     doc = await db.applications.find_one({"id": application_id}, {"_id": 0})
@@ -320,7 +339,7 @@ async def create_enquiry(input: EnquiryCreate):
             logger.error(f"Enquiry saved but notification email failed: {e}")
     return enquiry
 
-@api_router.get("/enquiries", response_model=List[Enquiry])
+@api_router.get("/enquiries", response_model=List[Enquiry], dependencies=[AdminDep])
 async def list_enquiries():
     docs = await db.enquiries.find().sort("created_at", -1).to_list(1000)
     out = []
@@ -334,6 +353,7 @@ async def list_enquiries():
 
 
 app.include_router(api_router)
+app.include_router(auth_router)
 
 app.add_middleware(
     CORSMiddleware,

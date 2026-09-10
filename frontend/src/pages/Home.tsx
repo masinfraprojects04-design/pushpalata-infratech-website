@@ -21,7 +21,7 @@ function Hero() {
   return (
     <section className="relative flex h-[100svh] min-h-[660px] items-center overflow-hidden bg-forest" data-testid="hero-section">
       <motion.div style={{ y, scale }} className="absolute inset-0">
-        <img src={IMG.hero} alt="765 kV transmission towers at dusk" className="h-full w-full object-cover" />
+        <img src={IMG.towerErectedCrew} alt="765 kV transmission tower erected by Pushpalata Infratech" className="h-full w-full object-cover object-[center_35%]" />
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-r from-forest via-forest/78 to-forest/25" />
       <div className="absolute inset-0 bg-gradient-to-t from-forest via-transparent to-forest/60" />
@@ -164,7 +164,7 @@ function AboutPreview() {
           </Reveal>
           <Reveal delay={0.28}>
             <div className="overflow-hidden rounded-2xl border-4 border-forest">
-              <img src={IMG.towerSky} alt="High-voltage transmission tower" className="h-52 w-full object-cover" loading="lazy" />
+              <img src={IMG.towerInsulatorsSky} alt="High-voltage transmission tower" className="h-52 w-full object-cover" loading="lazy" />
               <p className="bg-forest px-4 py-2 font-mono text-[10px] uppercase tracking-[0.3em] text-paper/60">
                 765 kV class line corridor
               </p>

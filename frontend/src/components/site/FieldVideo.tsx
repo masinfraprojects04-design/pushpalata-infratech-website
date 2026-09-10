@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { Play, Pause } from "lucide-react";
 import { FIELD_VIDEO } from "@/lib/data";
 import { Reveal, Chapter } from "@/components/site/Shared";
+import { GalleryTile } from "@/components/site/SiteGallery";
+import { useLightbox } from "@/components/site/Lightbox";
 
 type Key = keyof typeof FIELD_VIDEO;
 
@@ -9,6 +11,7 @@ export function FieldVideo({ id, no, light = false }: { id: Key; no: string; lig
   const v = FIELD_VIDEO[id];
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
+  const lb = useLightbox(v.stills);
 
   const toggle = () => {
     const el = ref.current;
@@ -64,14 +67,10 @@ export function FieldVideo({ id, no, light = false }: { id: Key; no: string; lig
             <p className={`text-base leading-relaxed ${light ? "text-paper/70" : "text-ink/70"}`}>{v.caption}</p>
             <div className="mt-6 grid grid-cols-2 gap-3">
               {v.stills.map((s, i) => (
-                <figure key={s.img} data-testid={`field-still-${i}`} className="group relative overflow-hidden rounded-xl">
-                  <img src={s.img} alt={s.caption} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                  <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/80 to-transparent px-3 pb-2.5 pt-8 font-mono text-[9px] uppercase leading-snug tracking-[0.18em] text-paper">
-                    {s.caption}
-                  </figcaption>
-                </figure>
+                <GalleryTile key={s.img} item={s} testId={`field-still-${i}`} heightClass="aspect-[4/3]" onOpen={() => lb.open(i)} />
               ))}
             </div>
+            {lb.node}
           </Reveal>
         </div>
       </div>

@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
 import WhatsAppButton from "@/components/site/WhatsAppButton";
+import AdminLogin from "@/pages/admin/AdminLogin";
+import AdminInbox from "@/pages/admin/AdminInbox";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -59,6 +61,8 @@ export default function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/privacy-policy" element={<LegalPage eyebrow="Legal" title="Privacy Policy" sections={PRIVACY_SECTIONS} testId="privacy-policy-page" />} />
         <Route path="/terms-and-conditions" element={<LegalPage eyebrow="Legal" title="Terms & Conditions" sections={TERMS_SECTIONS} testId="terms-page" />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminInbox />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

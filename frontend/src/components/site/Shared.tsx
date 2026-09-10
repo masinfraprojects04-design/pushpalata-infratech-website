@@ -70,7 +70,11 @@ export function Counter({ to, className, plain = false }: { to: number; classNam
       duration: 1.8,
       ease: "easeOut",
       onUpdate: (v) => {
-        if (ref.current) ref.current.textContent = plain ? String(Math.round(v)) : Math.round(v).toLocaleString("en-IN");
+        if (!ref.current) return;
+        const decimals = Number.isInteger(to) ? 0 : 1;
+        ref.current.textContent = plain
+          ? v.toFixed(decimals)
+          : v.toLocaleString("en-IN", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
       },
     });
     return () => controls.stop();

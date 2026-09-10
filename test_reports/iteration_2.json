@@ -1,0 +1,63 @@
+{
+  "summary": "Iteration 2: verified Admin Inbox (JWT cookie auth), admin-only endpoints, brute-force lockout, and Photo Lightbox on tower-erection / quality-hse / home stills / foundation / narendra-pune-765 pages. 14/14 backend tests pass. All required frontend flows and data-testids work. Regression: home hero image /media/tower-erected-crew.jpg loads, WhatsApp button present, public enquiry POST 200.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_admin_auth.py",
+    "/app/test_reports/pytest/pytest_admin.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "auth.py: bcrypt.checkpw is CPU-bound; called inside async login handler without run_in_executor. Under load this can block the event loop. Consider `await asyncio.to_thread(bcrypt.checkpw, ...)`.",
+    "auth.py brute-force counter is per-email only, not per-IP. An attacker can enumerate emails to bypass. Consider adding an IP-based bucket in addition.",
+    "server.py: list_enquiries returns Enquiry with EmailStr; admin list endpoints don't paginate — 1000-doc cap fine for MVP but add limit/offset params soon.",
+    "admin login sets Secure cookie — only works on https. Confirmed OK on preview URL; document this for local dev.",
+    "CORS still uses `allow_origins=*` with `allow_credentials=True` (per env default). Browsers reject credentials on wildcard origin; only works because same-origin. Set explicit origins for future subdomain use."
+  ],
+  "updated_files": ["/app/backend/tests/test_admin_auth.py"],
+  "success_rate": {"backend": "100% (14/14)", "frontend": "100% (all specified checks)"},
+  "test_credentials": "admin@pushpalatainfratech.com / Pushpalata@2026 (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Test application created with qa-test-admin@example.com; auto-cleaned by pytest fixture. login_attempts docs for lock-test@example.com purged. Any residual qa-test enquiries/applications and lock-test attempts scrubbed from Mongo post-run.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Admin auth tests live at /app/backend/tests/test_admin_auth.py. Cookie is Secure+SameSite=lax — must use https preview URL. Lightbox uses portal into body with z-[80]; when re-opening quickly after Escape, allow ~500ms before clicking close button. site-gallery testid layout: tower-erection=4, foundation-civil-works=6, narendra-pune-765=10, quality-hse hse-gallery-0..5, home field-still-0..3 inside field-video-stringing.",
+  "test_findings": {
+    "backend": {
+      "POST /api/admin/auth/login correct": "200, {id,email}, httponly admin_token cookie set",
+      "POST /api/admin/auth/login wrong password": "401 'Invalid email or password'",
+      "GET /api/admin/auth/me no cookie": "401",
+      "GET /api/admin/auth/me with cookie": "200",
+      "GET /api/admin/auth/me with Bearer token": "200",
+      "POST /api/admin/auth/logout": "200 + clears cookie; subsequent /me = 401",
+      "GET /api/enquiries no auth": "401",
+      "GET /api/enquiries with cookie": "200 list",
+      "GET /api/applications no auth": "401",
+      "GET /api/applications with cookie": "200 list",
+      "GET /api/admin/applications/{id}/resume no auth": "401",
+      "GET /api/admin/applications/{id}/resume with cookie": "200, %PDF payload",
+      "GET /api/admin/applications/unknown/resume": "404",
+      "Brute force 5 wrong + 6th": "429 (lock-test@example.com)",
+      "POST /api/enquiries public regression": "200"
+    },
+    "frontend": {
+      "/admin/login wrong password shows error toast": true,
+      "/admin/login correct → /admin (admin-inbox-page) shows admin-user-email": true,
+      "admin-tab-enquiries + admin-tab-applications with counts visible": true,
+      "admin-refresh-button clickable": true,
+      "admin-logout-button → redirects to /admin/login": true,
+      "Unauthenticated /admin → redirect to /admin/login": true,
+      "/services/tower-erection site-gallery has 4 tiles, all imgs load 200": true,
+      "Lightbox open/close, counter '01/04'→next→'02/04', ArrowRight→'03/04', prev, Escape close, close-btn close": true,
+      "/quality-hse hse-gallery-0..5 (6 tiles), lightbox opens with '01/06'": true,
+      "Home field-video-stringing with field-still-0..3, lightbox opens with '01/04'": true,
+      "/services/foundation-civil-works 6 tiles, no broken images": true,
+      "/projects/narendra-pune-765 10 tiles (4 tower + 6 foundation), no broken images": true,
+      "Home hero uses /media/tower-erected-crew.jpg": true,
+      "WhatsApp float button present on Home": true
+    }
+  }
+}

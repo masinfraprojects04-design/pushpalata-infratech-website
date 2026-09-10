@@ -42,10 +42,23 @@ export const IMG = {
   foundationExcavation: "/media/foundation-excavation.jpg",
   foundationCubeTest: "/media/foundation-cube-test.jpg",
   surveyTotalStation: "/media/survey-total-station.jpg",
+  foundationConcreting: "/media/foundation-concreting.jpg",
+  towerErectedCrew: "/media/tower-erected-crew.jpg",
+  towerErectionProgress: "/media/tower-erection-progress.jpg",
+  towerInsulatorsSky: "/media/tower-insulators-sky.jpg",
+  towerDusk: "/media/tower-dusk-silhouette.jpg",
 } as const;
+
+export const TOWER_GALLERY = [
+  { img: "/media/tower-erected-crew.jpg", caption: "765 kV tower erected — crew at Loc 13A" },
+  { img: "/media/tower-insulators-sky.jpg", caption: "Insulator strings hung, ready for stringing" },
+  { img: "/media/tower-erection-progress.jpg", caption: "Tower erection in progress — body extension" },
+  { img: "/media/tower-dusk-silhouette.jpg", caption: "Completed tower at dusk" },
+];
 
 export const FOUNDATION_GALLERY = [
   { img: "/media/foundation-excavation.jpg", caption: "Foundation pit excavation — JCB 3DX" },
+  { img: "/media/foundation-concreting.jpg", caption: "Chimney concreting with stub set" },
   { img: "/media/survey-total-station.jpg", caption: "Total-station survey & tower spotting" },
   { img: "/media/foundation-cement-stock.jpg", caption: "Cement stock verification at site" },
   { img: "/media/foundation-cube-test.jpg", caption: "Concrete cube test — 2000 kN CTM" },
@@ -101,7 +114,8 @@ export const SERVICES: Service[] = [
     title: "Tower Erection",
     short: "Transmission tower erection across high-voltage line projects and different tower configurations.",
     icon: Construction,
-    img: IMG.towerSky,
+    img: IMG.towerErectedCrew,
+    gallery: TOWER_GALLERY,
     intro:
       "The company's historical core strength. Tower erection executed across 765 kV, 400 kV and other high-voltage corridors in Rajasthan, Gujarat and Madhya Pradesh.",
     points: [
@@ -221,6 +235,7 @@ export interface Project {
   img: string;
   gallery?: { img: string; caption: string }[];
   highlights: { label: string; value: string }[];
+  certificate?: { issuer: string; ref: string; date: string; kind: "Experience Certificate" | "Undertaking" };
 }
 
 export const PROJECTS: Project[] = [
@@ -249,8 +264,8 @@ export const PROJECTS: Project[] = [
     ],
     category: "epc",
     note: "Current flagship EPC project. Service order effective 11 November 2025. Project reference AP1/0 to AP14/0.",
-    img: IMG.corridor,
-    gallery: FOUNDATION_GALLERY,
+    img: IMG.towerErectedCrew,
+    gallery: [...TOWER_GALLERY, ...FOUNDATION_GALLERY],
     highlights: [
       { label: "Approx. Length", value: "35 km" },
       { label: "Voltage", value: "765 kV D/C" },
@@ -267,12 +282,13 @@ export const PROJECTS: Project[] = [
     voltage: "765 kV",
     scope: ["Tower erection"],
     category: "current",
-    note: "Client / organization reference: Adani Transmission Ltd. Reported quantity: 9,000 MT completed + running, as of 30 April 2025.",
-    img: IMG.substation,
+    note: "Client: Adani Transmission Ltd. PO Nos. 5704002401 (08-10-2024) & 5704003179 (27-03-2025). Tower erection quantity 9,000 MT completed + running (company undertaking dated 30 April 2025, Khavda).",
+    img: IMG.towerDusk,
+    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking" },
     highlights: [
       { label: "Voltage", value: "765 kV" },
       { label: "Work", value: "Tower Erection" },
-      { label: "Reported Qty*", value: "9,000 MT+" },
+      { label: "Quantity", value: "9,000 MT+" },
       { label: "Reference Date", value: "30 Apr 2025" },
     ],
   },
@@ -286,8 +302,9 @@ export const PROJECTS: Project[] = [
     lineType: "Double Circuit, Hexa bundle",
     scope: ["Tower erection"],
     category: "current",
-    note: "Client / organization reference: Adani Transmission Ltd.",
-    img: IMG.lineDirt,
+    note: "Client: Adani Transmission Ltd. Part of the same PO set as KPS2–Halvad (9,000 MT combined tower erection, completed + running).",
+    img: IMG.towerInsulatorsSky,
+    certificate: { issuer: "Adani Transmission Ltd.", ref: "PO 5704002401 / 5704003179", date: "30 Apr 2025", kind: "Undertaking" },
     highlights: [
       { label: "Voltage", value: "765 kV D/C" },
       { label: "Configuration", value: "Hexa Bundle" },
@@ -303,14 +320,94 @@ export const PROJECTS: Project[] = [
     role: "Execution Partner — Stringing",
     scope: ["Stringing & installation of HTLS conductor"],
     category: "current",
-    note: "Contracting organization: LS Cable India Private Limited. Quantity: 1.7 CKM.",
+    note: "Client: LS Cable India Private Limited. PO No. LSCI/DVC/24-25/PIPL/001. Stringing & installation of HTLS conductor — 1.7 CKM completed.",
     img: IMG.stringingDrums,
+    certificate: { issuer: "LS Cable India Pvt. Ltd.", ref: "PO LSCI/DVC/24-25/PIPL/001", date: "30 Apr 2025", kind: "Undertaking" },
     highlights: [
       { label: "Work", value: "HTLS Stringing" },
       { label: "Quantity", value: "1.7 CKM" },
       { label: "Status", value: "Completed" },
       { label: "Reference Date", value: "30 Apr 2025" },
     ],
+  },
+  {
+    id: "mumbai-urja-marg-400",
+    name: "400 kV D/C Mumbai Urja Marg Project (Kharghar – Padghe), WRNER Pkg C",
+    location: "Maharashtra",
+    period: "Dec 2022 – Apr 2024",
+    role: "Subcontractor under Sterlite Power Transmission Ltd.",
+    voltage: "400 kV",
+    lineType: "Double Circuit",
+    scope: ["Structure erection — tower types DA+0 to DD+35 (3,129.078 MT, 101 nos)", "Civil / foundation works — 27 nos", "Stringing — 20.52 km"],
+    category: "subcontract",
+    note: "Executed against Sterlite PO Nos. 3290003653 (15-12-2022) & 3290003780 (22-02-2023). Certified compliant to required norms & standards; all statutory compliance completed.",
+    img: IMG.towerErectionProgress,
+    highlights: [
+      { label: "Erection", value: "3,129 MT / 101 Towers" },
+      { label: "Foundations", value: "27 Nos" },
+      { label: "Stringing", value: "20.52 km" },
+      { label: "Voltage", value: "400 kV D/C" },
+    ],
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg C-001", date: "07 Apr 2024", kind: "Experience Certificate" },
+  },
+  {
+    id: "vapi-sayali-220",
+    name: "220 kV D/C Vapi – Sayali Transmission Line, WRNER Pkg B",
+    location: "Gujarat",
+    period: "Dec 2022 – Apr 2024",
+    role: "Subcontractor under Sterlite Power Transmission Ltd.",
+    voltage: "220 kV",
+    lineType: "Double Circuit",
+    scope: ["Structure erection — tower types DA+0 to MCT (474 MT, 48 nos)", "Civil / foundation works — 63 nos", "Stringing — 15.7 km"],
+    category: "subcontract",
+    note: "Executed against Sterlite PO No. 3290003637 (09-12-2022). Certified compliant to required norms & standards; all statutory compliance completed.",
+    img: IMG.foundationExcavation,
+    highlights: [
+      { label: "Erection", value: "474 MT / 48 Towers" },
+      { label: "Foundations", value: "63 Nos" },
+      { label: "Stringing", value: "15.7 km" },
+      { label: "Voltage", value: "220 kV D/C" },
+    ],
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-WRNER Pkg B-001", date: "07 Apr 2024", kind: "Experience Certificate" },
+  },
+  {
+    id: "jamnagar-jamkhambaliya-400",
+    name: "POWERGRID Jamnagar RIL – Jamkhambaliya 400 kV D/C Transmission Line",
+    location: "Gujarat",
+    period: "Aug 2023 – Apr 2024",
+    role: "Subcontractor under Sterlite Power Transmission Ltd.",
+    voltage: "400 kV",
+    lineType: "Double Circuit",
+    scope: ["Structure erection — tower types DA+0 to QD+25 (2,467.264 MT, 110 nos)", "Civil / foundation works — 53 nos", "Stringing — 20.25 km"],
+    category: "subcontract",
+    note: "Executed against Sterlite PO No. 3290004128 (25-08-2023). Certified compliant to required norms & standards; all statutory compliance completed.",
+    img: IMG.stringingTower,
+    highlights: [
+      { label: "Erection", value: "2,467 MT / 110 Towers" },
+      { label: "Foundations", value: "53 Nos" },
+      { label: "Stringing", value: "20.25 km" },
+      { label: "Voltage", value: "400 kV D/C" },
+    ],
+    certificate: { issuer: "Sterlite Power Transmission Ltd.", ref: "SPTL/MSI-WCC-JKTL-002", date: "11 Apr 2024", kind: "Experience Certificate" },
+  },
+  {
+    id: "adselr-assam-substation",
+    name: "33/11 kV Partially Outdoor Substation, Khagrabari — ADSELR Project",
+    location: "Udalguri District, Assam",
+    period: "2023 – 2024",
+    role: "Subcontractor under Ashoka Buildcon Ltd.",
+    voltage: "33/11 kV",
+    scope: ["Complete construction of 1 no. 33/11 kV partially outdoor substation at Khagrabari, Tongla Subdivision"],
+    category: "subcontract",
+    note: "Assam Distribution System Enhancement & Loss Reduction (ADSELR) project, AIIB funded, Mangaldoi Circle. Quality of work certified as satisfactory by Ashoka Buildcon Ltd.",
+    img: IMG.substation,
+    highlights: [
+      { label: "Work", value: "33/11 kV Substation" },
+      { label: "Quantity", value: "1 No. Completed" },
+      { label: "Funding", value: "AIIB" },
+      { label: "Location", value: "Assam" },
+    ],
+    certificate: { issuer: "Ashoka Buildcon Ltd.", ref: "Experience Certificate", date: "2024", kind: "Experience Certificate" },
   },
   {
     id: "chittorgarh-ajmer-765",
@@ -451,14 +548,35 @@ export const TIMELINE: { year: string; title: string; desc: string; marker?: boo
   { year: "2014", title: "Company Established", desc: "Pushpalata Infratech Private Limited incorporated on 12 March 2014." },
   { year: "2014–2016", title: "765 kV Chittorgarh–Ajmer", desc: "Subcontract execution under KEC International Ltd., Rajasthan." },
   { year: "2016–2019", title: "Gujarat & Madhya Pradesh Execution", desc: "Foundation, tower erection and stringing across major transmission packages." },
-  { year: "2020–2023", title: "High-Voltage Execution Portfolio", desc: "765 kV and 400 kV works across Gujarat, Rajasthan and Madhya Pradesh." },
-  { year: "2024–2025", title: "Expanded Execution Portfolio", desc: "KPS2–Halvad, Khavda–Lakadia tower erection and HTLS stringing-related works." },
+  { year: "2020–2022", title: "High-Voltage Execution Portfolio", desc: "765 kV and 400 kV works across Gujarat, Rajasthan and Madhya Pradesh." },
+  { year: "2022–2024", title: "Sterlite Power — Three Certified Packages", desc: "Mumbai Urja Marg 400 kV, Vapi–Sayali 220 kV and Jamnagar–Jamkhambaliya 400 kV: 6,070 MT erection, 143 foundations, 56.5 km stringing — all certified." },
+  { year: "2023–2024", title: "33/11 kV Substation, Assam", desc: "Complete 33/11 kV partially outdoor substation at Khagrabari under Ashoka Buildcon Ltd. (ADSELR, AIIB funded)." },
+  { year: "2024–2025", title: "Adani 765 kV Tower Erection", desc: "KPS2–Halvad and Khavda–Lakadia 765 kV lines — 9,000 MT tower erection completed + running; HTLS stringing for LS Cable (DVC)." },
   { year: "Nov 2025", title: "Transition to Full EPC", desc: "Expansion from specialized field execution into integrated EPC delivery.", marker: true },
   { year: "Current", title: "765 kV New Narendra–Pune", desc: "35 km full EPC project in Karnataka — Package-1, AP1/0 to AP14/0.", marker: true },
 ];
 
+export const CERTIFIED_RECORD = {
+  totals: [
+    { label: "Certified Tower Erection", value: 6070, suffix: " MT" },
+    { label: "Towers Erected (Certified)", value: 259, suffix: " Nos" },
+    { label: "Foundations (Certified)", value: 143, suffix: " Nos" },
+    { label: "Stringing (Certified)", value: 56.5, suffix: " km" },
+  ],
+  rows: [
+    { client: "Sterlite Power Transmission Ltd.", project: "400 kV D/C Mumbai Urja Marg (Kharghar–Padghe), WRNER Pkg C", erection: "3,129 MT · 101 nos", foundations: "27 nos", stringing: "20.52 km", date: "07 Apr 2024", id: "mumbai-urja-marg-400" },
+    { client: "Sterlite Power Transmission Ltd.", project: "POWERGRID Jamnagar RIL – Jamkhambaliya 400 kV D/C", erection: "2,467 MT · 110 nos", foundations: "53 nos", stringing: "20.25 km", date: "11 Apr 2024", id: "jamnagar-jamkhambaliya-400" },
+    { client: "Sterlite Power Transmission Ltd.", project: "220 kV D/C Vapi – Sayali, WRNER Pkg B", erection: "474 MT · 48 nos", foundations: "63 nos", stringing: "15.7 km", date: "07 Apr 2024", id: "vapi-sayali-220" },
+    { client: "Ashoka Buildcon Ltd.", project: "33/11 kV Substation, Khagrabari — ADSELR (AIIB), Assam", erection: "1 no. substation", foundations: "—", stringing: "—", date: "2024", id: "adselr-assam-substation" },
+    { client: "Adani Transmission Ltd.", project: "KPS2–Halvad & Khavda PS2–Lakadia 765 kV lines", erection: "9,000 MT+ (running)", foundations: "—", stringing: "—", date: "30 Apr 2025", id: "kps2-halvad-765" },
+    { client: "LS Cable India Pvt. Ltd.", project: "HTLS conductor stringing — DVC project", erection: "—", foundations: "—", stringing: "1.7 CKM", date: "30 Apr 2025", id: "dvc-htls" },
+  ],
+};
+
 export const PARTNERS: { name: string; label: string }[] = [
   { name: "KEC International Ltd.", label: "Main Contractor" },
+  { name: "Sterlite Power Transmission Ltd.", label: "Main Contractor — Certified" },
+  { name: "Ashoka Buildcon Ltd.", label: "Main Contractor — Certified" },
   { name: "Adani Transmission Ltd.", label: "Project Organization" },
   { name: "LS Cable India Pvt. Ltd.", label: "Contracting Organization" },
   { name: "Transrail Lighting", label: "Project Organization" },

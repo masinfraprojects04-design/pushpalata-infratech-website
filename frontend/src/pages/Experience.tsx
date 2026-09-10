@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { TIMELINE, PARTNERS, IMG } from "@/lib/data";
 import { Reveal, PageHero, Chapter, CTALink, Counter, Marquee } from "@/components/site/Shared";
+import { CertifiedRecord } from "@/components/site/CertifiedRecord";
 
 function Timeline() {
   return (
@@ -37,7 +38,7 @@ function Timeline() {
               {i === TIMELINE.length - 3 && (
                 <Reveal delay={0.1}>
                   <div className="mt-6 overflow-hidden rounded-2xl border-4 border-forest">
-                    <img src={IMG.crewOrange} alt="Field execution team" className="h-56 w-full object-cover" loading="lazy" />
+                    <img src={IMG.stringingTensioner} alt="Field execution team" className="h-56 w-full object-cover" loading="lazy" />
                   </div>
                 </Reveal>
               )}
@@ -84,7 +85,7 @@ function Numbers() {
 function PartnerStrip() {
   return (
     <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
-      <Chapter no="02" label="Selected Project Partners / Clients / Contractors" />
+      <Chapter no="03" label="Selected Project Partners / Clients / Contractors" />
       <Reveal>
         <h2 className="mt-8 max-w-2xl font-heading text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-ink sm:text-4xl">
           Organizations We Have <span className="text-ember">Executed With</span>
@@ -115,14 +116,15 @@ export default function Experience() {
         eyebrow="Our Experience"
         title="A Decade on Record"
         description="From 765 kV subcontract execution in 2014 to full EPC delivery today — a timeline built project by project."
-        img={IMG.towerBlack}
+        img={IMG.towerErectionProgress}
       />
       <Timeline />
       <Marquee
         dark
-        items={["Rajasthan", "Gujarat", "Madhya Pradesh", "Karnataka", "765 kV", "400 kV", "HTLS Stringing", "Tower Erection"]}
+        items={["Rajasthan", "Gujarat", "Maharashtra", "Madhya Pradesh", "Assam", "Karnataka", "765 kV", "400 kV", "220 kV", "HTLS Stringing", "Tower Erection", "33/11 kV Substation"]}
       />
       <Numbers />
+      <CertifiedRecord no="02" />
       <PartnerStrip />
       <section className="bg-sand/60 py-20">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-8 lg:flex-row lg:items-center">

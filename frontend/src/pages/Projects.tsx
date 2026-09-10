@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, BadgeCheck } from "lucide-react";
 import { PROJECTS, IMG, type ProjectCategory } from "@/lib/data";
 import { Reveal, PageHero, Chapter, CTALink } from "@/components/site/Shared";
 
@@ -33,7 +33,7 @@ export default function Projects() {
         eyebrow="Project Experience"
         title="Proven on Major Corridors"
         description="A clear record: historical subcontract execution experience and current direct EPC capability — labelled honestly."
-        img={IMG.citySunset}
+        img={IMG.towerDusk}
       />
 
       <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
@@ -84,6 +84,14 @@ export default function Projects() {
                       {p.voltage}
                     </span>
                   )}
+                  {p.certificate && (
+                    <span
+                      data-testid={`project-certified-${p.id}`}
+                      className="absolute right-4 top-4 inline-flex items-center gap-1 rounded-full bg-paper/95 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.18em] text-forest"
+                    >
+                      <BadgeCheck className="h-3 w-3 text-ember" /> {p.certificate.kind === "Undertaking" ? "Client Ref." : "Certified"}
+                    </span>
+                  )}
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-ember">
@@ -106,8 +114,8 @@ export default function Projects() {
         <Reveal>
           <p className="mt-12 max-w-3xl rounded-xl border-l-4 border-ember bg-white p-5 font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] text-ink/60">
             Historical projects are shown as subcontract / execution-partner experience. Only the New
-            Narendra–Pune package is presented as full EPC. Line lengths are stated only where the
-            company-specific executed quantity is confirmed.
+            Narendra–Pune package is presented as full EPC. "Certified" marks projects backed by a client-issued
+            experience certificate; quantities shown are taken directly from those certificates.
           </p>
         </Reveal>
       </section>

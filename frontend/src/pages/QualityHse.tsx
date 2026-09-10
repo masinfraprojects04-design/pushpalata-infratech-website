@@ -1,6 +1,8 @@
 import { IMG } from "@/lib/data";
 import { Reveal, PageHero, Chapter, CTALink } from "@/components/site/Shared";
 import { Certifications } from "@/components/site/Certifications";
+import { GalleryTile } from "@/components/site/SiteGallery";
+import { useLightbox } from "@/components/site/Lightbox";
 import { ShieldCheck, HardHat, ClipboardCheck, HeartHandshake } from "lucide-react";
 
 const PILLARS = [
@@ -28,7 +30,7 @@ const PILLARS = [
 
 const GALLERY = [
   { img: IMG.stringingPuller, caption: "Tension stringing operations" },
-  { img: IMG.lattice, caption: "Tower climbing & erection" },
+  { img: IMG.towerErectionProgress, caption: "Tower climbing & erection" },
   { img: IMG.stringingTower, caption: "Inspection & supervision" },
   { img: IMG.foundationCubeTest, caption: "Foundation quality checks" },
   { img: IMG.foundationToolbox, caption: "Toolbox talks & PPE" },
@@ -36,13 +38,14 @@ const GALLERY = [
 ];
 
 export default function QualityHse() {
+  const lb = useLightbox(GALLERY);
   return (
     <main data-testid="quality-hse-page" className="bg-forest">
       <PageHero
         eyebrow="Quality & HSE"
         title="Safety. Quality. Responsibility."
         description="Disciplined execution is our licence to operate — on every foundation, every tower, every span."
-        img={IMG.crew}
+        img={IMG.foundationToolbox}
       />
 
       <section className="cad-grid bg-forest py-24 sm:py-32">
@@ -82,21 +85,11 @@ export default function QualityHse() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {GALLERY.map((g, i) => (
               <Reveal key={g.caption} delay={(i % 3) * 0.07}>
-                <figure className="group relative overflow-hidden rounded-2xl" data-testid={`hse-gallery-${i}`}>
-                  <img
-                    src={g.img}
-                    alt={g.caption}
-                    loading="lazy"
-                    className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-forest/90 via-transparent to-transparent" />
-                  <figcaption className="absolute bottom-4 left-4 font-mono text-[10px] uppercase tracking-[0.25em] text-paper">
-                    {g.caption}
-                  </figcaption>
-                </figure>
+                <GalleryTile item={g} testId={`hse-gallery-${i}`} onOpen={() => lb.open(i)} />
               </Reveal>
             ))}
           </div>
+          {lb.node}
         </div>
       </section>
 

@@ -96,7 +96,7 @@ function CapabilityNote() {
             <div className="relative">
               <div className="absolute -right-3 -top-3 h-16 w-16 border-r-4 border-t-4 border-ember" />
               <img
-                src={IMG.corridor}
+                src={IMG.foundationConcreting}
                 alt="765 kV corridor in execution"
                 className="aspect-[4/3] w-full rounded-xl object-cover"
                 loading="lazy"

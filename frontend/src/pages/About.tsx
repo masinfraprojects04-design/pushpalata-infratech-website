@@ -152,7 +152,7 @@ function People() {
         </div>
         <Reveal delay={0.12}>
           <div className="overflow-hidden rounded-2xl border-4 border-forest">
-            <img src={IMG.crew} alt="Site execution team in safety PPE" className="h-80 w-full object-cover" loading="lazy" />
+            <img src={IMG.foundationToolbox} alt="Site execution team in safety PPE" className="h-80 w-full object-cover" loading="lazy" />
             <p className="bg-forest px-4 py-2 font-mono text-[10px] uppercase tracking-[0.3em] text-paper/60">
               Site execution team • PPE-compliant works
             </p>
@@ -277,7 +277,7 @@ export default function About() {
         eyebrow="About Us — Established 2014"
         title="A Decade on the Line"
         description="Over a decade of industry experience in transmission-line execution — now expanding into full EPC delivery for high-voltage power infrastructure."
-        img={IMG.pylonField}
+        img={IMG.towerErectedCrew}
       />
       <Story />
       <MissionVision />

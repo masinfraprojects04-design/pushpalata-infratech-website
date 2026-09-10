@@ -48,7 +48,7 @@ export default function Services() {
         eyebrow="Our Core Services"
         title="Full-Cycle Transmission Execution"
         description="From survey and foundations to stringing, testing and commissioning — eight disciplines, one execution standard."
-        img={IMG.lattice}
+        img={IMG.towerInsulatorsSky}
       />
       <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 sm:py-32">
         <Chapter no="01" label="What We Deliver" />
