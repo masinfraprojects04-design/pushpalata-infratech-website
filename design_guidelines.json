@@ -1,0 +1,204 @@
+{
+  "theme": "hybrid_corporate_industrial",
+  "theme_strategy": "Precision Engineering & Power Infrastructure — High-contrast editorial light mode with deep forest green structural anchors, dark slate charcoal panels, engineering safety orange kinetic triggers, and technical grid aesthetics.",
+  "typography": {
+    "fonts": {
+      "heading": "Manrope, sans-serif",
+      "body": "DM Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale_px": {
+      "display": 60,
+      "h1": 48,
+      "h2": 36,
+      "h3": 24,
+      "body": 16,
+      "caption": 14
+    },
+    "rules": {
+      "headings": "font-black tracking-tighter uppercase leading-[1.05] text-[#0A261E]",
+      "subheadings": "font-bold tracking-tight text-[#1E293B]",
+      "mono_labels": "font-mono uppercase text-xs tracking-[0.2em] font-semibold text-[#FF5500]",
+      "body": "font-normal leading-relaxed text-[#334155]"
+    }
+  },
+  "colors": {
+    "primary": "#0A261E",
+    "primary_light": "#133E32",
+    "secondary": "#1E293B",
+    "accent": "#FF5500",
+    "on_accent": "#FFFFFF",
+    "accent_amber": "#F59E0B",
+    "neutral_bg": "#F8FAFC",
+    "border_subtle": "#E2E8F0",
+    "surfaces": [
+      {
+        "name": "page",
+        "kind": "solid",
+        "bg": "#F8FAFC",
+        "on_bg": "#0A261E",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#FF5500",
+          "accent_badge": "#0A261E",
+          "error": "#DC2626",
+          "success": "#16A34A"
+        }
+      },
+      {
+        "name": "panel_white",
+        "kind": "solid",
+        "bg": "#FFFFFF",
+        "on_bg": "#0A261E",
+        "on_bg_muted": "#475569",
+        "roles": {
+          "link": "#FF5500",
+          "error": "#DC2626",
+          "success": "#16A34A"
+        }
+      },
+      {
+        "name": "dark_forest_section",
+        "kind": "solid",
+        "bg": "#0A261E",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#CBD5E1",
+        "roles": {
+          "link": "#FF7A33",
+          "highlight": "#FACC15",
+          "error": "#F87171",
+          "success": "#4ADE80"
+        }
+      },
+      {
+        "name": "charcoal_slate_section",
+        "kind": "solid",
+        "bg": "#0F172A",
+        "on_bg": "#F8FAFC",
+        "on_bg_muted": "#94A3B8",
+        "roles": {
+          "link": "#FF5500",
+          "highlight": "#38BDF8",
+          "error": "#F87171",
+          "success": "#4ADE80"
+        }
+      },
+      {
+        "name": "hero_overlay",
+        "kind": "image",
+        "contrast_against": "#0A1A15",
+        "guarantee": "scrim: linear-gradient(135deg, rgba(10,38,30,0.92) 0%, rgba(15,23,42,0.85) 60%, rgba(10,38,30,0.75) 100%)",
+        "on_bg": "#FFFFFF",
+        "on_bg_muted": "#E2E8F0",
+        "roles": {
+          "link": "#FF7A33",
+          "badge": "#F59E0B",
+          "error": "#F87171",
+          "success": "#4ADE80"
+        }
+      },
+      {
+        "name": "crystal_glass_nav",
+        "kind": "glass",
+        "contrast_against": "#FFFFFF",
+        "guarantee": "backdrop-blur-xl bg-white/90 border-b border-slate-200/80 shadow-sm",
+        "on_bg": "#0A261E",
+        "on_bg_muted": "#334155",
+        "roles": {
+          "link": "#FF5500",
+          "error": "#DC2626",
+          "success": "#16A34A"
+        }
+      }
+    ]
+  },
+  "entry_surfaces": {
+    "/": "split hero — kinetic masked typography + KPI badge left, dynamic 765kV transmission tower visual & EPC beacon right",
+    "/about": "editorial manifesto layout — dual era cards (2014-2025 subcontract vs 2025-present full EPC) + leadership grid",
+    "/services": "modular technical catalog — 8 specialized transmission & substation service cards with technical scope modals",
+    "/projects": "curated EPC portfolio matrix — split into Flagship 765kV EPC, historical subcontract execution (7 projects) & recent works",
+    "/epc-capabilities": "step-by-step EPC engineering roadmap — 9-stage execution pipeline (Survey to Commissioning) with technical milestones",
+    "/experience": "chronological infrastructure timeline (2014 to present) with verified package data & partner ecosystem",
+    "/quality-hse": "dark tactical HSE control center — Golden Safety Rules, zero-incident protocol, and PPE compliance standards",
+    "/careers": "talent acquisition board — current infrastructure openings, company safety culture, and direct application form",
+    "/contact": "split corporate contact center — dual offices (Bihar Registered + Karnataka EPC site) and backend-connected enquiry form"
+  },
+  "visual_enhancers": {
+    "grid_pattern": "Technical CAD-style engineering grid background (dots or fine 1px grid lines with 5% opacity)",
+    "transmission_motifs": "Angular steel lattice patterns, electrical busbar diagrams, voltage badges (765 kV, 400 kV, 220 kV, 132 kV, 66 kV, 33 kV)",
+    "marquee": "Slow editorial ribbon featuring key capabilities: TOWER ERECTION • 765 KV TRANSMISSION • RE-CONDUCTORING • HTLS • GIS SUBSTATIONS • CIVIL FOUNDATIONS • FULL EPC EXECUTION",
+    "kpi_strip": "High-impact counter metrics with management asterisk (*): Established 2014 | 765 kV Max Voltage | 35 km Flagship EPC | Up to 3,000 Project Manpower* | 50+ km Cumulative Experience*"
+  },
+  "grids_and_layouts": {
+    "bento_mode": "Tetris Grid (asymmetric 12-column grid for showcase sections)",
+    "section_spacing": "py-20 md:py-28 lg:py-32",
+    "container_max_w": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "card_padding": "p-6 md:p-8"
+  },
+  "motion": {
+    "library": "motion (framer-motion compatible)",
+    "smooth_scroll": "Lenis smooth scrolling integrated at top level layout",
+    "hero_reveal": "Line-by-line staggered text mask reveal (y: 100% to 0%, duration: 0.8s, ease: [0.16, 1, 0.3, 1])",
+    "scroll_reveal": "Intersection-observer based fade-and-rise (opacity 0 -> 1, y: 30 -> 0)",
+    "hover_effects": "Card subtle elevation translate-y-1 + 1px border glow to #FF5500/40",
+    "prefers_reduced_motion": "Respect system settings with fallback instantaneous transitions"
+  },
+  "accessibility": {
+    "contrast_target": "WCAG AA (minimum 4.5:1 for normal text, 3:1 for large graphical components)",
+    "data_testid_convention": "All interactive elements, forms, CTA buttons, tabs, modal triggers, and KPI cards must include kebab-case data-testid (e.g. data-testid='nav-request-discussion-btn', data-testid='enquiry-form-submit-btn')",
+    "screen_readers": "Aria attributes for accordions, modals, and navigation drawers"
+  },
+  "image_urls": {
+    "hero_transmission_tower": {
+      "url": "https://images.unsplash.com/photo-1779723045107-20b13e50102f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHwzfHxwb3dlciUyMHRyYW5zbWlzc2lvbiUyMHRvd2VyJTIwc3RlZWwlMjBncmlkfGVufDB8fHx8MTc4OTAyNjYzOHww&ixlib=rb-4.1.0&q=85",
+      "alt": "Heavy steel lattice 765kV power transmission tower upward perspective",
+      "category": "Hero & Flagship EPC section"
+    },
+    "substation_transformers": {
+      "url": "https://images.unsplash.com/photo-1509390144018-eeaf65052242?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwxfHxlbGVjdHJpY2FsJTIwc3Vic3RhdGlvbiUyMGhpZ2glMjB2b2x0YWdlJTIwdHJhbnNmb3JtZXJzfGVufDB8fHx8MTc4OTAyNjYzOHww&ixlib=rb-4.1.0&q=85",
+      "alt": "High voltage electrical substation transformers and switchyard equipment",
+      "category": "Substation Works & Capabilities"
+    },
+    "substation_sunset_busbars": {
+      "url": "https://images.unsplash.com/photo-1509390673020-a5b2450e33f1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDR8MHwxfHNlYXJjaHwyfHxlbGVjdHJpY2FsJTIwc3Vic3RhdGlvbiUyMGhpZ2glMjB2b2x0YWdlJTIwdHJhbnNmb3JtZXJzfGVufDB8fHx8MTc4OTAyNjYzOHww&ixlib=rb-4.1.0&q=85",
+      "alt": "High voltage power station switchgear structure during sunset",
+      "category": "EPC Project Portfolio & Engineering"
+    },
+    "engineers_inspection": {
+      "url": "https://images.unsplash.com/photo-1581094480465-4e6c25fb4a52?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxjb25zdHJ1Y3Rpb24lMjBlbmdpbmVlcnMlMjBwb3dlciUyMGluZnJhc3RydWN0dXJlJTIwaW5zcGVjdGlvbnxlbnwwfHx8fDE3ODkwMjY2Mzh8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Transmission line construction project engineer with safety hardhat reviewing blueprints",
+      "category": "About Us & Quality HSE"
+    },
+    "lineman_stringing_action": {
+      "url": "https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwxfHxjb25zdHJ1Y3Rpb24lMjBlbmdpbmVlcnMlMjBwb3dlciUyMGluZnJhc3RydWN0dXJlJTIwaW5zcGVjdGlvbnxlbnwwfHx8fDE3ODkwMjY2Mzh8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Lineman technician rigging high tension power cable at height with safety harness",
+      "category": "Services: Stringing & Tower Erection"
+    },
+    "tower_detail_insulators": {
+      "url": "https://images.unsplash.com/photo-1772310870957-5d380f75bbbb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHw0fHxwb3dlciUyMHRyYW5zbWlzc2lvbiUyMHRvd2VyJTIwc3RlZWwlMjBncmlkfGVufDB8fHx8MTc4OTAyNjYzOHww&ixlib=rb-4.1.0&q=85",
+      "alt": "Power transmission tower cross-arm and insulator disc assembly",
+      "category": "Re-Conductoring & Engineering Technology"
+    }
+  },
+  "component_structure": {
+    "navigation": "frontend/src/components/Navbar.tsx (Sticky glassmorphic bar, transforms on scroll, contains phone hotline, email, primary orange CTA 'REQUEST A PROJECT DISCUSSION')",
+    "footer": "frontend/src/components/Footer.tsx (High-contrast dark green corporate footer with quick links, CIN U45200BR2014PTC022184, GSTIN, EPFO, Udyam info, emergency site helpline)",
+    "kpi_strip": "frontend/src/components/KpiStrip.tsx",
+    "project_enquiry_modal": "frontend/src/components/ProjectEnquiryModal.tsx",
+    "voltage_spectrum_band": "frontend/src/components/VoltageBand.tsx (Interactive 33kV to 765kV range selector with technical specs)"
+  },
+  "instructions_to_main_agent": {
+    "content_authenticity": "CRITICAL: Clearly separate historical Subcontract/Execution partner experience (2014-2023 across 7 major packages) from Full EPC Execution (from Nov 2025: 35 km 765 kV D/C New Narendra–Pune Pkg-1). Do not invent direct-client claims for subcontract packages (clearly mark as 'Subcontract / Execution Partner for EPC Prime').",
+    "backend_persistence": "Implement FastAPI /api/enquiries and /api/careers/apply endpoints with MongoDB persistence (motor client). Also provide seed data for verified projects and company metadata.",
+    "brand_details": {
+      "company_name": "Pushpalata Infratech Private Limited",
+      "cin": "U45200BR2014PTC022184",
+      "established": "2014",
+      "directors": ["Pushplata Devi", "Muni Lal Singh", "Ankaj Kumar Singh"],
+      "phones": ["+91 97716 66166", "+91 97717 87713"],
+      "email": "info@pushpalatainfratech.com",
+      "registered_office": "Bihar, India",
+      "site_office": "Karnataka, India (765 kV Project Site Office)"
+    }
+  }
+}
