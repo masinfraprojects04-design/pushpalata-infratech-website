@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { SERVICES, CONTACT, CORPORATE } from "@/lib/data";
 
 const QUICK_LINKS = [
@@ -20,8 +20,8 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-ember">
-                <Zap className="h-5 w-5 text-white" />
+              <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-paper/20">
+                <img src="/logo.png" alt="Pushpalata Infratech logo" className="h-10 w-10 object-contain" />
               </span>
               <span className="leading-none">
                 <span className="block font-heading text-lg font-extrabold tracking-tight">PUSHPALATA</span>

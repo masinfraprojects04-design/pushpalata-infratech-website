@@ -17,6 +17,7 @@ Build a complete, premium, modern corporate website for Pushpalata Infratech Pri
 Pages: Home, About Us, Services (+ detail template), Projects (+ detail template), EPC Capabilities, Our Experience, Quality & HSE, Careers, Contact. Sticky compacting navbar with orange "Request a Project Discussion" CTA; mobile hamburger overlay; footer with quick links/services/corporate info. SEO title/meta per brief.
 
 ## Implemented (2026-09-10)
+- Real company PLP logo (recreated hi-res from client's uploaded mark) wired into navbar, footer and favicon
 - Kinetic hero: parallax 765 kV imagery, masked line-by-line headline reveal, CTAs, scroll indicator
 - KPI strip (Established 2014 / 765 kV / 35 km / Up to 3,000* / 50+ km*) with animated counters; * footnoted as management-provided
 - About preview with 2014–2025 subcontract vs 2025–present EPC era cards; editorial marquee; 8 service cards; animated 33→765 kV voltage band; flagship EPC showcase; partner strip with honest role labels; CTA band

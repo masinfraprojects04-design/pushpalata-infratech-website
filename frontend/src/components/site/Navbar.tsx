@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Zap, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const LINKS = [
   { label: "Home", to: "/" },
@@ -18,8 +18,8 @@ const LINKS = [
 function Logo({ light }: { light: boolean }) {
   return (
     <Link to="/" data-testid="nav-logo" className="flex items-center gap-3">
-      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-ember">
-        <Zap className="h-5 w-5 text-white" />
+      <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-ink/10">
+        <img src="/logo.png" alt="Pushpalata Infratech logo" className="h-9 w-9 object-contain" />
       </span>
       <span className="leading-none">
         <span
