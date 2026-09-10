@@ -54,7 +54,7 @@ function Numbers() {
     { label: "Established", value: 2014, suffix: "" },
     { label: "Highest Voltage", value: 765, suffix: " kV" },
     { label: "Project Manpower", value: 3000, suffix: "*", prefix: "Up to " },
-    { label: "Transmission Experience", value: 50, suffix: "+ km*" },
+    { label: "Line Executed as Subcontractor", value: 1500, suffix: "+ km" },
   ];
   return (
     <section className="cad-grid bg-forest py-20 sm:py-24">
@@ -65,7 +65,7 @@ function Numbers() {
               <div>
                 <p className="font-heading text-4xl font-extrabold tracking-tight text-paper sm:text-5xl">
                   {s.prefix}
-                  <Counter to={s.value} />
+                  <Counter to={s.value} plain={s.label === "Established"} />
                   <span className="text-ember">{s.suffix}</span>
                 </p>
                 <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.25em] text-paper/50">{s.label}</p>

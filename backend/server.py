@@ -1,7 +1,9 @@
 import asyncio
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, UploadFile, File, Form, HTTPException
+from fastapi.responses import FileResponse
 from dotenv import load_dotenv
+import secrets
 from starlette.middleware.cors import CORSMiddleware
 import os
 import logging
@@ -58,6 +60,30 @@ class Enquiry(EnquiryCreate):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+
+class Application(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: str
+    discipline: str
+    experience: Optional[str] = None
+    location: Optional[str] = None
+    message: Optional[str] = None
+    resume_filename: str
+    resume_size: int
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+APP_URL = os.environ.get("APP_URL", "").rstrip("/")
+UPLOAD_DIR = ROOT_DIR / "uploads" / "resumes"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+RESUME_MAX_BYTES = 5 * 1024 * 1024
+RESUME_TYPES = {
+    "application/pdf": ".pdf",
+    "application/msword": ".doc",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ".docx",
+}
 
 EMAIL_BASE_URL = "https://integrations.emergentagent.com"
 EMAIL_KEY = os.environ.get("EMERGENT_EMAIL_KEY")
@@ -168,6 +194,92 @@ def _enquiry_email_html(e: Enquiry) -> str:
         '<a href="https://pushpalatainfratech.com">pushpalatainfratech.com</a></td></tr>'
         '</table></td></tr></table>'
     )
+
+
+def _application_email_html(a: Application, download_url: str) -> str:
+    rows = [
+        ("Name", a.name), ("Email", a.email), ("Phone", a.phone), ("Discipline", a.discipline),
+        ("Experience", a.experience), ("Current Location", a.location), ("Message", a.message),
+        ("Resume", f"{a.resume_filename} ({a.resume_size // 1024} KB)"),
+    ]
+    trs = "".join(
+        f'<tr><td style="padding:8px 14px;border:1px solid #e1dcd0;font-family:Arial,sans-serif;'
+        f'font-size:12px;color:#5c6660;text-transform:uppercase;letter-spacing:1px">{k}</td>'
+        f'<td style="padding:8px 14px;border:1px solid #e1dcd0;font-family:Arial,sans-serif;'
+        f'font-size:14px;color:#131a17">{escape(v) if v else "-"}</td></tr>'
+        for k, v in rows
+    )
+    return (
+        '<table role="presentation" width="100%" style="background:#f8f6f1;padding:24px"><tr><td>'
+        '<table role="presentation" width="100%" style="max-width:640px;background:#ffffff">'
+        '<tr><td style="background:#0a261e;padding:18px 24px;font-family:Arial,sans-serif;'
+        'font-size:16px;font-weight:bold;color:#f8f6f1">New Career Application &mdash; '
+        f'{escape(EMAIL_FROM_NAME)}</td></tr>'
+        f'<tr><td style="padding:20px 24px"><table role="presentation" width="100%">{trs}</table>'
+        f'<p style="margin:20px 0 0"><a href="{escape(download_url)}" style="display:inline-block;background:#e85d04;'
+        'color:#ffffff;padding:12px 22px;border-radius:999px;font-family:Arial,sans-serif;font-size:13px;'
+        'font-weight:bold;text-decoration:none">Download Resume</a></p></td></tr>'
+        '<tr><td style="padding:14px 24px;font-family:Arial,sans-serif;font-size:11px;color:#888">'
+        f'Sent by the {escape(EMAIL_FROM_NAME)} website careers form &mdash; '
+        '<a href="https://pushpalatainfratech.com">pushpalatainfratech.com</a></td></tr>'
+        '</table></td></tr></table>'
+    )
+
+
+@api_router.post("/applications", response_model=Application)
+async def create_application(
+    name: str = Form(..., min_length=2, max_length=120),
+    email: EmailStr = Form(...),
+    phone: str = Form(..., min_length=6, max_length=20),
+    discipline: str = Form(..., min_length=2, max_length=80),
+    experience: Optional[str] = Form(None, max_length=120),
+    location: Optional[str] = Form(None, max_length=120),
+    message: Optional[str] = Form(None, max_length=2000),
+    resume: UploadFile = File(...),
+):
+    ext = RESUME_TYPES.get(resume.content_type or "")
+    if not ext:
+        raise HTTPException(status_code=400, detail="Resume must be a PDF, DOC or DOCX file")
+    data = await resume.read()
+    if len(data) > RESUME_MAX_BYTES:
+        raise HTTPException(status_code=400, detail="Resume must be smaller than 5 MB")
+    if not data:
+        raise HTTPException(status_code=400, detail="Resume file is empty")
+
+    app_obj = Application(
+        name=name, email=email, phone=phone, discipline=discipline,
+        experience=experience or None, location=location or None, message=message or None,
+        resume_filename=Path(resume.filename or f"resume{ext}").name, resume_size=len(data),
+    )
+    token = secrets.token_urlsafe(24)
+    stored_name = f"{app_obj.id}{ext}"
+    (UPLOAD_DIR / stored_name).write_bytes(data)
+    doc = {**app_obj.model_dump(), "stored_name": stored_name, "download_token": token}
+    await db.applications.insert_one(doc)
+
+    if EMAIL_KEY and OWNER_EMAIL and APP_URL.startswith("https://"):
+        try:
+            url = f"{APP_URL}/api/applications/{app_obj.id}/resume?token={token}"
+            email_id = await send_email(
+                to=OWNER_EMAIL,
+                subject=f"New Career Application — {app_obj.name} ({app_obj.discipline})",
+                html=_application_email_html(app_obj, url),
+            )
+            logger.info(f"Application notification email sent: {email_id}")
+        except Exception as e:
+            logger.error(f"Application saved but notification email failed: {e}")
+    return app_obj
+
+
+@api_router.get("/applications/{application_id}/resume")
+async def download_resume(application_id: str, token: str):
+    doc = await db.applications.find_one({"id": application_id}, {"_id": 0})
+    if not doc or not secrets.compare_digest(doc.get("download_token", ""), token):
+        raise HTTPException(status_code=404, detail="Resume not found")
+    path = UPLOAD_DIR / doc["stored_name"]
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Resume file missing")
+    return FileResponse(path, filename=doc["resume_filename"])
 
 
 @api_router.get("/")

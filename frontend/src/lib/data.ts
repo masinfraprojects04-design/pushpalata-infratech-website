@@ -447,6 +447,39 @@ export const CORPORATE = {
   incorporated: "12 March 2014",
 };
 
+export const CERTIFICATIONS = [
+  {
+    code: "ISO 9001:2015",
+    title: "Quality Management System",
+    body: "Execution planned, inspected and documented in line with ISO 9001 quality-management principles.",
+  },
+  {
+    code: "ISO 14001:2015",
+    title: "Environmental Management",
+    body: "Corridor works, ROW handling and waste management aligned to ISO 14001 environmental practice.",
+  },
+  {
+    code: "ISO 45001:2018",
+    title: "Occupational Health & Safety",
+    body: "Height-work, stringing and live-line safety systems aligned to ISO 45001 OH&S requirements.",
+  },
+  {
+    code: "MSME / Udyam",
+    title: "Udyam Registered Enterprise",
+    body: `Registered under the Government of India MSME framework — ${CORPORATE.udyam}.`,
+  },
+  {
+    code: "MCA / ROC",
+    title: "Registered Private Limited Company",
+    body: `Incorporated ${CORPORATE.incorporated} — CIN ${CORPORATE.cin}.`,
+  },
+  {
+    code: "GST & EPFO",
+    title: "Statutory Compliance",
+    body: `GSTIN ${CORPORATE.gstin} · EPFO ${CORPORATE.epfo}. Fully compliant workforce and tax registrations.`,
+  },
+];
+
 export const DIRECTORS = ["Pushplata Devi", "Muni Lal Singh", "Ankaj Kumar Singh"];
 
 export const VALUES = [

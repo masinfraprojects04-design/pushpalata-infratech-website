@@ -9,7 +9,7 @@ const KPIS = [
   { label: "Highest Voltage", value: 765, suffix: " kV" },
   { label: "Current Full EPC Project", value: 35, suffix: " km" },
   { label: "Project Manpower", prefix: "Up to ", value: 3000, suffix: "*" },
-  { label: "Transmission Experience", value: 50, suffix: "+ km*" },
+  { label: "Line Executed as Subcontractor", value: 1500, suffix: "+ km" },
 ];
 
 function Hero() {
@@ -69,7 +69,7 @@ function Hero() {
           <Link
             to="/contact"
             data-testid="hero-project-discussion-link"
-            className="group inline-flex items-center gap-2 font-heading text-sm font-bold uppercase tracking-wider text-paper/80 transition-colors hover:text-ember"
+            className="group inline-flex items-center gap-2 font-heading text-sm font-bold uppercase tracking-wider text-ember transition-colors hover:text-paper"
           >
             Start a Project Discussion
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -93,7 +93,7 @@ function KpiStrip() {
               </span>
               <span className="font-heading text-3xl font-extrabold tracking-tight text-forest sm:text-4xl">
                 {"prefix" in k && k.prefix}
-                <Counter to={k.value} />
+                <Counter to={k.value} plain={k.label === "Established"} />
                 <span className="text-ember">{k.suffix}</span>
               </span>
             </div>
@@ -374,7 +374,7 @@ function CtaBand() {
           <Link
             to="/contact"
             data-testid="cta-band-contact-button"
-            className="group inline-flex items-center gap-2.5 rounded-full bg-forest px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-paper transition-transform duration-300 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-forest shadow-[0_12px_30px_rgba(0,0,0,0.15)] transition-[transform,background-color,color] duration-300 hover:-translate-y-0.5 hover:bg-forest hover:text-paper"
           >
             Start a Project Discussion
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

@@ -4,6 +4,7 @@
 @import "@fontsource-variable/manrope";
 @import "@fontsource-variable/dm-sans";
 @import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/roboto-slab";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -11,6 +12,7 @@
     --font-heading: 'Manrope Variable', sans-serif;
     --font-sans: 'DM Sans Variable', sans-serif;
     --font-mono: 'JetBrains Mono Variable', monospace;
+    --font-brand: 'Roboto Slab Variable', serif;
     --color-forest: #0A261E;
     --color-forest-2: #0E3327;
     --color-forest-3: #134231;

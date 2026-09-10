@@ -21,14 +21,19 @@ Pages: Home, About Us, Services (+ detail template), Projects (+ detail template
 - Enquiry email alerts: every POST /api/enquiries also emails info@pushpalatainfratech.com via Emergent-managed Resend proxy (guardrail-gated template; email failure never blocks enquiry saving — logged only)
 - Legal pages: /privacy-policy and /terms-and-conditions with footer links wired
 - Kinetic hero: parallax 765 kV imagery, masked line-by-line headline reveal, CTAs, scroll indicator
-- KPI strip (Established 2014 / 765 kV / 35 km / Up to 3,000* / 50+ km*) with animated counters; * footnoted as management-provided
+- KPI strip (Established 2014 / 765 kV / 35 km EPC / Up to 3,000* / 1,500+ km as subcontractor — user-confirmed Sep 2026) with animated counters; * footnoted as management-provided
 - About preview with 2014–2025 subcontract vs 2025–present EPC era cards; editorial marquee; 8 service cards; animated 33→765 kV voltage band; flagship EPC showcase; partner strip with honest role labels; CTA band
 - About: story, mission/vision/values, people & organization, engineering & technology (PLS-CADD etc.), corporate registrations (CIN/GSTIN/Udyam/EPFO), directors
 - Projects: filterable portfolio (Current EPC / Recent-Current Execution / Subcontract), 11 projects with honest role labels, detail template with scope/meta/notes
 - EPC Capabilities: 9-step animated timeline (Survey→Commissioning) + framework-in-action on flagship project
 - Experience: vertical timeline 2014→current, marquee, animated stats, partner strip
-- Quality & HSE: dark section, 4 pillars, field gallery, no invented certifications
-- Careers: discipline chips, locations, mailto resume CTA to info@pushpalatainfratech.com
+- Quality & HSE: dark section, 4 pillars, field gallery
+- Certifications & Compliance section (components/site/Certifications.tsx, data in CERTIFICATIONS in data.ts) on About (#06) and Quality & HSE (#03): ISO 9001/14001/45001 worded as 'aligned to' (NOT certified — user skipped confirming; verify with client), plus verified Udyam/CIN/GST/EPFO
+- Floating WhatsApp button (components/site/WhatsAppButton.tsx) on all pages, popover with both numbers (wa.me links)
+- Navbar brand: single-line 'PUSHPALATA INFRATECH PRIVATE LIMITED' in Roboto Slab (font-brand), dark green when scrolled / white over hero; CTA 'Contact Us'; Contact link removed from desktop nav (still in mobile menu)
+- Home CTA band button 'Start a Project Discussion' now white/forest (user asked for colour change)
+- Root + frontend eslint.config.js added only so the platform lint check can run (project lint is oxlint)
+- Careers: discipline chips, locations, ONLINE APPLICATION FORM with resume upload (PDF/DOC/DOCX ≤5MB) → POST /api/applications (multipart) → Mongo `applications` + file in /app/backend/uploads/resumes + owner email (Resend) with tokenized download link GET /api/applications/{id}/resume?token=…; mailto fallback kept
 - Contact: 2 office cards, call/WhatsApp/email strip, Google Map embed, project enquiry form persisting to MongoDB with success toast
 - Lenis smooth scrolling, lenis CSS, SEO meta in index.html
 
@@ -39,14 +44,12 @@ Pages: Home, About Us, Services (+ detail template), Projects (+ detail template
 
 ## Backlog / remaining
 - P0: Swap stock imagery for real company/project photographs when supplied
-- P1: Resend email notification for new enquiries (integration playbook ready via integration_expert)
-- P1: Dedicated careers email once confirmed by management
-- P2: Privacy Policy / Terms & Conditions full pages (currently footer placeholders)
-- P2: Certifications/awards section once officially confirmed
+- P1: Confirm ISO certification status with client; attach real certificate images/PDFs to Certifications cards
 - P2: Social media links once accounts exist
-- P2: WhatsApp floating button, blog/news section for SEO
+- P2: Blog/news section for SEO
+- P2: Admin view for enquiries/applications
 
 ## Next tasks
-1. Collect real project photos + confirmed KPI figures from management
-2. Wire enquiry email notifications (Resend managed integration)
-3. Add legal pages
+1. Collect real project photos (user has not attached any yet)
+2. Confirm ISO certificates
+3. Testing: /app/test_reports/iteration_1.json — all backend (8/8) + frontend flows passed (Sep 10 2026)

@@ -1,5 +1,6 @@
 import { IMG, VALUES, DIRECTORS, CORPORATE, CONTACT } from "@/lib/data";
 import { Reveal, PageHero, Chapter, CTALink, Eyebrow } from "@/components/site/Shared";
+import { Certifications } from "@/components/site/Certifications";
 import { ShieldCheck, Target, Eye, Users, DraftingCompass, FileCheck2, Building2 } from "lucide-react";
 
 function Story() {
@@ -283,6 +284,7 @@ export default function About() {
       <People />
       <Engineering />
       <CorporateInfo />
+      <Certifications no="06" />
       <section className="bg-sand/60 py-20">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-8 lg:flex-row lg:items-center">
           <div>

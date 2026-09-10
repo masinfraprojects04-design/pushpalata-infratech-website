@@ -23,11 +23,8 @@ export default function Footer() {
               <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-paper/20">
                 <img src="/logo.png" alt="Pushpalata Infratech logo" className="h-10 w-10 object-contain" />
               </span>
-              <span className="leading-none">
-                <span className="block font-heading text-lg font-extrabold tracking-tight">PUSHPALATA</span>
-                <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.3em] text-ember">
-                  Infratech Pvt. Ltd.
-                </span>
+              <span className="font-brand text-sm font-extrabold uppercase leading-tight tracking-tight sm:text-base">
+                Pushpalata Infratech Private Limited
               </span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/60">

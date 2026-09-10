@@ -1,5 +1,6 @@
 import { IMG } from "@/lib/data";
 import { Reveal, PageHero, Chapter, CTALink } from "@/components/site/Shared";
+import { Certifications } from "@/components/site/Certifications";
 import { ShieldCheck, HardHat, ClipboardCheck, HeartHandshake } from "lucide-react";
 
 const PILLARS = [
@@ -96,14 +97,10 @@ export default function QualityHse() {
               </Reveal>
             ))}
           </div>
-          <Reveal delay={0.1}>
-            <p className="mt-10 max-w-3xl font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-paper/40">
-              Certifications, awards and safety statistics are published only after official confirmation.
-              Details available on request.
-            </p>
-          </Reveal>
         </div>
       </section>
+
+      <Certifications no="03" />
 
       <section className="bg-paper py-20">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-5 sm:px-8 lg:flex-row lg:items-center">

@@ -17,21 +17,17 @@ const LINKS = [
 
 function Logo({ light }: { light: boolean }) {
   return (
-    <Link to="/" data-testid="nav-logo" className="flex items-center gap-3">
+    <Link to="/" data-testid="nav-logo" className="flex shrink-0 items-center gap-3">
       <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-ink/10">
         <img src="/logo.png" alt="Pushpalata Infratech logo" className="h-9 w-9 object-contain" />
       </span>
-      <span className="leading-none">
-        <span
-          className={`block font-heading text-base font-extrabold tracking-tight sm:text-lg ${
-            light ? "text-paper" : "text-ink"
-          }`}
-        >
-          PUSHPALATA
-        </span>
-        <span className="mt-1 block font-mono text-[9px] uppercase tracking-[0.3em] text-ember">
-          Infratech Pvt. Ltd.
-        </span>
+      <span
+        data-testid="nav-brand-name"
+        className={`font-brand text-[13px] font-extrabold uppercase leading-none tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[15px] xl:text-sm 2xl:text-base ${
+          light ? "text-paper" : "text-[#1f5c2e]"
+        }`}
+      >
+        Pushpalata Infratech Private Limited
       </span>
     </Link>
   );
@@ -66,19 +62,19 @@ export default function Navbar() {
         }`}
       >
         <div
-          className={`mx-auto flex max-w-7xl items-center justify-between px-5 transition-[height] duration-500 sm:px-8 ${
+          className={`mx-auto flex max-w-[1500px] items-center justify-between gap-6 px-5 transition-[height] duration-500 sm:px-8 ${
             scrolled ? "h-16" : "h-24"
           }`}
         >
           <Logo light={light} />
-          <nav className="hidden items-center gap-5 xl:flex" data-testid="desktop-nav">
-            {LINKS.map((l) => (
+          <nav className="hidden items-center gap-4 xl:flex 2xl:gap-6" data-testid="desktop-nav">
+            {LINKS.filter((l) => l.to !== "/contact").map((l) => (
               <NavLink
                 key={l.to}
                 to={l.to}
                 data-testid={`nav-link-${l.label.toLowerCase().replace(/[^a-z]+/g, "-")}`}
                 className={({ isActive }) =>
-                  `font-mono text-[10.5px] uppercase tracking-[0.18em] transition-colors duration-300 ${
+                  `whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.14em] transition-colors duration-300 2xl:text-[10.5px] 2xl:tracking-[0.18em] ${
                     isActive ? "text-ember" : light ? "text-paper/80 hover:text-paper" : "text-ink/70 hover:text-ink"
                   }`
                 }
@@ -91,11 +87,9 @@ export default function Navbar() {
             <Link
               to="/contact"
               data-testid="nav-cta-button"
-              className={`hidden items-center gap-2 rounded-full bg-ember px-5 py-2.5 font-heading text-xs font-bold uppercase tracking-wider text-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-ember-2 sm:inline-flex ${
-                scrolled ? "" : ""
-              }`}
+              className="hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-full bg-ember px-5 py-2.5 font-heading text-xs font-bold uppercase tracking-wider text-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-ember-2 sm:inline-flex"
             >
-              Request a Project Discussion
+              Contact Us
               <ArrowUpRight className="h-4 w-4" />
             </Link>
             <button

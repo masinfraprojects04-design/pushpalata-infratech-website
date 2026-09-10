@@ -1,6 +1,7 @@
 import { IMG, CONTACT } from "@/lib/data";
 import { Reveal, PageHero, Chapter } from "@/components/site/Shared";
-import { Mail, MapPin, ArrowUpRight } from "lucide-react";
+import { ApplicationForm } from "@/components/site/ApplicationForm";
+import { Mail, MapPin } from "lucide-react";
 
 const CATEGORIES = [
   "Civil Engineering",
@@ -70,30 +71,14 @@ export default function Careers() {
           </div>
 
           <Reveal delay={0.12}>
-            <div className="rounded-2xl bg-forest p-9 sm:p-12">
-              <div className="cad-grid absolute" />
-              <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-ember">
-                <Mail className="h-7 w-7 text-white" />
-              </span>
-              <h3 className="mt-7 font-heading text-2xl font-extrabold uppercase tracking-tight text-paper">
-                Send Your Resume
-              </h3>
-              <p className="mt-4 text-sm leading-relaxed text-paper/65">
-                Email your resume with your discipline, experience and current location. Shortlisted
-                candidates are contacted as project requirements open up.
-              </p>
-              <a
-                href={`mailto:${CONTACT.email}?subject=Career%20Application%20—%20Pushpalata%20Infratech`}
-                data-testid="careers-resume-button"
-                className="group mt-8 inline-flex items-center gap-2.5 rounded-full bg-ember px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white transition-[background-color,transform] duration-300 hover:-translate-y-0.5 hover:bg-ember-2"
-              >
-                Send Your Resume
-                <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-              <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.2em] text-paper/45">
-                {CONTACT.email}
-              </p>
-            </div>
+            <ApplicationForm disciplines={CATEGORIES} />
+            <a
+              href={`mailto:${CONTACT.email}?subject=Career%20Application%20—%20Pushpalata%20Infratech`}
+              data-testid="careers-resume-button"
+              className="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55 transition-colors hover:text-ember"
+            >
+              <Mail className="h-3.5 w-3.5" /> Or email your resume to {CONTACT.email}
+            </a>
           </Reveal>
         </div>
       </section>

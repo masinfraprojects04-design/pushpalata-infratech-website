@@ -4,6 +4,7 @@ import Lenis from "lenis";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/site/Navbar";
 import Footer from "@/components/site/Footer";
+import WhatsAppButton from "@/components/site/WhatsAppButton";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -61,6 +62,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
+      <WhatsAppButton />
       <Toaster />
     </div>
   );

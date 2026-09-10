@@ -61,7 +61,7 @@ export function MaskedLine({
   );
 }
 
-export function Counter({ to, className }: { to: number; className?: string }) {
+export function Counter({ to, className, plain = false }: { to: number; className?: string; plain?: boolean }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   useEffect(() => {
@@ -70,11 +70,11 @@ export function Counter({ to, className }: { to: number; className?: string }) {
       duration: 1.8,
       ease: "easeOut",
       onUpdate: (v) => {
-        if (ref.current) ref.current.textContent = Math.round(v).toLocaleString("en-IN");
+        if (ref.current) ref.current.textContent = plain ? String(Math.round(v)) : Math.round(v).toLocaleString("en-IN");
       },
     });
     return () => controls.stop();
-  }, [inView, to]);
+  }, [inView, to, plain]);
   return (
     <span ref={ref} className={className}>
       0

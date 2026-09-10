@@ -1,0 +1,56 @@
+{
+  "summary": "Backend (8/8 pytest) + Frontend (Playwright) end-to-end verification of the careers application flow, WhatsApp float button, Certifications section, Navbar responsiveness (1280/1366/1920/1024), Home KPI strip and CTA band, plus /api/enquiries regression. All required behaviors work as specified.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_applications.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "ApplicationForm HTML5 `required` on discipline runs before onSubmit — the `Please attach your resume.` toast is only reached when all other required fields (name/email/phone/discipline) are filled. Not a bug per spec but worth noting: consider `noValidate` on <form> + explicit checks to give consistent custom toast messaging.",
+    "Optional: when the user removes an already-selected resume and re-picks the same filename, the hidden <input type=file> change event may not fire if the path is identical (browser behavior). A `input.value = ''` before `pickFile` (or on remove) would avoid this pitfall for keyboard users.",
+    "server.py: create_application accepts UploadFile.content_type from the client which is user-controllable. Type is validated (good), but consider also sniffing magic bytes for defense-in-depth (%PDF, PK\\x03\\x04 for docx, D0 CF 11 E0 for doc)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_applications.py"
+  ],
+  "success_rate": {"backend": "100% (8/8)", "frontend": "100% (all specified checks)"},
+  "test_credentials": "N/A — public site.",
+  "seed_data_creation": "Test rows/files were created via qa-test*@example.com and cleaned up by test_zzz_cleanup (Mongo `applications`/`enquiries` docs matching /^qa-test/ deleted, associated files under /app/backend/uploads/resumes removed).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend tests live at /app/backend/tests/test_applications.py and include cleanup. Use fresh emails prefixed 'qa-test'. Frontend tests navigate to /careers, /about, /quality-hse, /, /contact on the preview URL. KPI counter animation takes ~1.8-2.5s, wait accordingly. HTML5 `required` on the discipline <select> gates form submission before the custom 'Please attach your resume.' toast can appear — fill all required fields first to test the resume validation toast.",
+  "test_findings": {
+    "backend": {
+      "POST /api/applications happy path": "200, id/resume_filename/resume_size/created_at present; download_token & stored_name NOT leaked",
+      "wrong content-type image/png": "400 'Resume must be a PDF, DOC or DOCX file'",
+      "missing required fields": "422",
+      "resume > 5MB": "400 'Resume must be smaller than 5 MB'",
+      "GET /api/applications/{id}/resume?token=wrong": "404",
+      "GET with token read from Mongo": "200, content-type application/pdf, starts with %PDF",
+      "POST /api/enquiries regression": "200"
+    },
+    "frontend": {
+      "career-application-form visible": true,
+      "submit without resume shows 'Please attach your resume.' toast (with all other required fields filled)": true,
+      "resume-selected chip w/ filename appears via hidden input set_input_files": true,
+      "resume-remove clears chip": true,
+      "successful submission shows 'Application received...' toast and form resets": true,
+      "whatsapp-float-button visible on Home/About/Careers, popover opens/closes, wa.me links to 919771666166 and 919771787713 with target=_blank": true,
+      "certifications-section on /about and /quality-hse with 6 cards containing ISO 9001, ISO 14001, ISO 45001, MSME, MCA, GST": true,
+      "Navbar at 1280/1366/1920: brand single-line, 8 desktop nav links on single row, CTA 'Contact Us'": true,
+      "Navbar at 1024: mobile-menu-button visible, desktop-nav hidden": true,
+      "KPI strip shows 'ESTABLISHED / 2014' (no comma) and 'LINE EXECUTED AS SUBCONTRACTOR / 1,500+ km'": true,
+      "cta-band-contact-button bg=rgb(255,255,255) white with forest text rgb(10,38,30)": true,
+      "/contact form present": true
+    }
+  }
+}
