@@ -28,8 +28,9 @@ export default function Footer() {
               </span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/60">
-              Transmission-line construction, tower erection, stringing, civil works and full EPC execution —
-              engineering the power that moves India since 2014.
+              Pushpalata Infratech Private Limited is a transmission infrastructure execution company
+              established in 2014, with experience in high-voltage transmission works and growing full-EPC
+              capability.
             </p>
           </div>
 

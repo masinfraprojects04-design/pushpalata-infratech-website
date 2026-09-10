@@ -55,7 +55,7 @@ function Numbers() {
     { label: "Established", value: 2014, suffix: "" },
     { label: "Highest Voltage", value: 765, suffix: " kV" },
     { label: "Project Manpower", value: 3000, suffix: "*", prefix: "Up to " },
-    { label: "Line Executed as Subcontractor", value: 1500, suffix: "+ km" },
+    { label: "Transmission Execution Experience", value: 1500, suffix: "+ km*" },
   ];
   return (
     <section className="cad-grid bg-forest py-20 sm:py-24">

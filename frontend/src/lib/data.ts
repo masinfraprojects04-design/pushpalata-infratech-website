@@ -142,8 +142,8 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "stringing",
-    title: "Stringing",
-    short: "S/C, D/C and bundled conductor stringing including Hexa, Octa, Double, Quad and other configurations, as applicable to project requirements.",
+    title: "Conductor Stringing",
+    short: "Single Circuit, Double Circuit, Hexa, Octa, Double, Quad and other project-specific conductor configurations.",
     icon: Cable,
     img: IMG.stringingTensioner,
     video: "stringing",
@@ -189,7 +189,7 @@ export const SERVICES: Service[] = [
   },
   {
     slug: "survey-transmission-engineering",
-    title: "Survey & Transmission Engineering",
+    title: "Survey & Engineering",
     short: "Transmission-line survey activities and engineering support including PLS-CADD / PLS Profile-related workflows and project management support.",
     icon: Compass,
     img: IMG.surveyTotalStation,
@@ -606,19 +606,9 @@ export const CORPORATE = {
 
 export const CERTIFICATIONS = [
   {
-    code: "ISO 9001:2015",
-    title: "Quality Management System",
-    body: "Execution planned, inspected and documented in line with ISO 9001 quality-management principles.",
-  },
-  {
-    code: "ISO 14001:2015",
-    title: "Environmental Management",
-    body: "Corridor works, ROW handling and waste management aligned to ISO 14001 environmental practice.",
-  },
-  {
-    code: "ISO 45001:2018",
-    title: "Occupational Health & Safety",
-    body: "Height-work, stringing and live-line safety systems aligned to ISO 45001 OH&S requirements.",
+    code: "MCA / ROC",
+    title: "Registered Private Limited Company",
+    body: `Incorporated ${CORPORATE.incorporated} — CIN ${CORPORATE.cin}.`,
   },
   {
     code: "MSME / Udyam",
@@ -626,14 +616,24 @@ export const CERTIFICATIONS = [
     body: `Registered under the Government of India MSME framework — ${CORPORATE.udyam}.`,
   },
   {
-    code: "MCA / ROC",
-    title: "Registered Private Limited Company",
-    body: `Incorporated ${CORPORATE.incorporated} — CIN ${CORPORATE.cin}.`,
+    code: "GST",
+    title: "GST Registered",
+    body: `GSTIN ${CORPORATE.gstin} — compliant invoicing and tax registration for all project work.`,
   },
   {
-    code: "GST & EPFO",
-    title: "Statutory Compliance",
-    body: `GSTIN ${CORPORATE.gstin} · EPFO ${CORPORATE.epfo}. Fully compliant workforce and tax registrations.`,
+    code: "EPFO",
+    title: "Registered Employer",
+    body: `EPFO establishment code ${CORPORATE.epfo} — statutory provident-fund compliance for the project workforce.`,
+  },
+  {
+    code: "Client Certified",
+    title: "Client-Issued Experience Certificates",
+    body: "Execution quantities certified in writing by Sterlite Power Transmission Ltd. and Ashoka Buildcon Ltd. — see Our Experience.",
+  },
+  {
+    code: "Statutory",
+    title: "Work-Order Compliance",
+    body: "All statutory compliance related to certified work orders completed, as recorded by the issuing main contractors.",
   },
 ];
 

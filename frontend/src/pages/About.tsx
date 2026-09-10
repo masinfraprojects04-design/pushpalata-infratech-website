@@ -73,12 +73,12 @@ function MissionVision() {
     {
       icon: Target,
       title: "Mission",
-      body: "To deliver reliable and efficient transmission infrastructure through disciplined execution, engineering capability, quality workmanship, safety and responsible project management.",
+      body: "To deliver reliable transmission and infrastructure execution through safe working practices, quality workmanship, engineering support and disciplined project management, while continuously expanding our capabilities toward integrated EPC delivery.",
     },
     {
       icon: Eye,
       title: "Vision",
-      body: "To grow from a trusted transmission execution partner into a recognized EPC company delivering high-quality power infrastructure across India.",
+      body: "To become a trusted transmission and power-infrastructure EPC company, recognized for strong field execution, safety, quality and dependable project delivery across India.",
     },
   ];
   return (

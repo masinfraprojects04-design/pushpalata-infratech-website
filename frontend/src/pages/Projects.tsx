@@ -26,6 +26,14 @@ const ROLE_LABELS: Record<ProjectCategory, string> = {
 export default function Projects() {
   const [filter, setFilter] = useState<ProjectCategory | "all">("all");
   const list = PROJECTS.filter((p) => filter === "all" || p.category === filter);
+  const groups: { key: ProjectCategory; title: string; sub: string }[] = [
+    { key: "epc", title: "Current Flagship EPC Project", sub: "Direct full-EPC execution by Pushpalata Infratech" },
+    { key: "current", title: "Recent Execution Experience", sub: "2024 – 2025 · tower erection and HTLS stringing as execution partner" },
+    { key: "subcontract", title: "Subcontractor / Execution Experience", sub: "2014 – 2024 · projects executed under main contractors — not PIPL EPC contracts" },
+  ];
+  const sections = filter === "all"
+    ? groups.map((g) => ({ ...g, items: PROJECTS.filter((p) => p.category === g.key) })).filter((g) => g.items.length)
+    : [{ key: filter, title: groups.find((g) => g.key === filter)!.title, sub: groups.find((g) => g.key === filter)!.sub, items: list }];
 
   return (
     <main data-testid="projects-page">
@@ -58,8 +66,16 @@ export default function Projects() {
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {list.map((p, i) => (
+        {sections.map((sec) => (
+        <div key={sec.key} data-testid={`project-group-${sec.key}`} className="mt-14 first:mt-12">
+          <Reveal>
+            <div className="flex flex-wrap items-end justify-between gap-3 border-b border-ink/10 pb-4">
+              <h2 className="font-heading text-xl font-extrabold uppercase tracking-tight text-ink sm:text-2xl">{sec.title}</h2>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50">{sec.sub}</p>
+            </div>
+          </Reveal>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {sec.items.map((p, i) => (
             <Reveal key={p.id} delay={(i % 3) * 0.07}>
               <Link
                 to={`/projects/${p.id}`}
@@ -110,6 +126,8 @@ export default function Projects() {
             </Reveal>
           ))}
         </div>
+        </div>
+        ))}
 
         <Reveal>
           <p className="mt-12 max-w-3xl rounded-xl border-l-4 border-ember bg-white p-5 font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] text-ink/60">

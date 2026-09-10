@@ -9,14 +9,14 @@ export function Certifications({ no, light = false }: { no: string; light?: bool
       className={light ? "cad-grid bg-forest py-24 sm:py-32" : "bg-white py-24 sm:py-32"}
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
-        <Chapter no={no} label="Certifications & Compliance" light={light} />
+        <Chapter no={no} label="Registrations & Compliance" light={light} />
         <Reveal>
           <h2
             className={`mt-8 max-w-3xl font-heading text-3xl font-extrabold uppercase leading-[1.05] tracking-tight sm:text-4xl ${
               light ? "text-paper" : "text-ink"
             }`}
           >
-            Built on Systems You Can <span className="text-ember">Audit</span>
+            Registered. Compliant. <span className="text-ember">Verifiable.</span>
           </h2>
         </Reveal>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -51,7 +51,7 @@ export function Certifications({ no, light = false }: { no: string; light?: bool
             light ? "text-paper/40" : "text-ink/40"
           }`}
         >
-          Certificate copies and audit documentation are shared with clients on request.
+          Registration and certificate copies are shared with clients on request. No certifications beyond those listed are claimed.
         </p>
       </div>
     </section>

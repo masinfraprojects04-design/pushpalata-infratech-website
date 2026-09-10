@@ -17,13 +17,13 @@ const LINKS = [
 
 function Logo({ light }: { light: boolean }) {
   return (
-    <Link to="/" data-testid="nav-logo" className="flex shrink-0 items-center gap-3">
+    <Link to="/" data-testid="nav-logo" className="flex min-w-0 shrink items-center gap-3 xl:shrink-0">
       <span className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-ink/10">
         <img src="/logo.png" alt="Pushpalata Infratech logo" className="h-9 w-9 object-contain" />
       </span>
       <span
         data-testid="nav-brand-name"
-        className={`font-brand text-[13px] font-extrabold uppercase leading-none tracking-tight whitespace-nowrap transition-colors duration-500 sm:text-[15px] xl:text-sm 2xl:text-base ${
+        className={`font-brand text-[11px] font-extrabold uppercase leading-[1.15] tracking-tight transition-colors duration-500 sm:whitespace-nowrap sm:text-[15px] sm:leading-none xl:text-sm 2xl:text-base ${
           light ? "text-paper" : "text-[#1f5c2e]"
         }`}
       >
@@ -97,7 +97,7 @@ export default function Navbar() {
               data-testid="mobile-menu-button"
               aria-label="Open menu"
               onClick={() => setOpen((v) => !v)}
-              className={`flex h-11 w-11 items-center justify-center rounded-full border transition-colors xl:hidden ${
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border transition-colors xl:hidden ${
                 light ? "border-paper/30 text-paper" : "border-ink/20 text-ink"
               }`}
             >
@@ -151,7 +151,7 @@ export default function Navbar() {
                 data-testid="mobile-nav-cta-button"
                 className="inline-flex items-center gap-2 rounded-full bg-ember px-7 py-4 font-heading text-sm font-bold uppercase tracking-wider text-white"
               >
-                Request a Project Discussion
+                Contact Us
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
             </motion.div>

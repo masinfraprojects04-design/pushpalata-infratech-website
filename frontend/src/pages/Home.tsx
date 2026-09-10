@@ -10,7 +10,7 @@ const KPIS = [
   { label: "Highest Voltage", value: 765, suffix: " kV" },
   { label: "Current Full EPC Project", value: 35, suffix: " km" },
   { label: "Project Manpower", prefix: "Up to ", value: 3000, suffix: "*" },
-  { label: "Line Executed as Subcontractor", value: 1500, suffix: "+ km" },
+  { label: "Transmission Execution Experience", value: 1500, suffix: "+ km*" },
 ];
 
 function Hero() {
@@ -35,10 +35,10 @@ function Hero() {
         </MaskedLine>
         <h1 className="mt-6 font-heading font-extrabold uppercase leading-[0.98] tracking-tight text-paper">
           <MaskedLine delay={0.15} className="text-4xl sm:text-6xl lg:text-[5.2rem]">
-            Engineering the Power
+            Power Transmission.
           </MaskedLine>
           <MaskedLine delay={0.3} className="text-4xl sm:text-6xl lg:text-[5.2rem]">
-            <span className="text-ember">That Moves</span> India
+            <span className="text-ember">Built for</span> Execution.
           </MaskedLine>
         </h1>
         <motion.p
@@ -47,7 +47,7 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.55 }}
           className="mt-6 font-mono text-[11px] uppercase tracking-[0.3em] text-paper/60"
         >
-          Pushpalata Infratech Private Limited — Transmission Infrastructure & EPC Execution
+          Pushpalata Infratech Private Limited — Transmission Line • Substation • EPC
         </motion.p>
         <motion.p
           initial={{ opacity: 0, y: 24 }}
@@ -55,9 +55,9 @@ function Hero() {
           transition={{ duration: 0.9, delay: 0.7 }}
           className="mt-4 max-w-xl text-base leading-relaxed text-paper/75 sm:text-lg"
         >
-          Built on more than a decade of transmission-line execution experience, Pushpalata Infratech is
-          expanding from specialized field execution into full EPC delivery for high-voltage power
-          infrastructure.
+          Established in 2014, Pushpalata Infratech has built practical transmission-line execution
+          experience across high-voltage infrastructure projects and is now expanding that field strength
+          into integrated EPC delivery.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -72,7 +72,7 @@ function Hero() {
             data-testid="hero-project-discussion-link"
             className="group inline-flex items-center gap-2 font-heading text-sm font-bold uppercase tracking-wider text-ember transition-colors hover:text-paper"
           >
-            Start a Project Discussion
+            Contact Us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
@@ -85,9 +85,9 @@ function Hero() {
 function KpiStrip() {
   return (
     <section className="relative z-10 mx-auto -mt-24 max-w-7xl px-5 sm:px-8" data-testid="kpi-strip">
-      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 shadow-[0_24px_80px_rgba(10,38,30,0.18)] sm:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10 shadow-[0_24px_80px_rgba(10,38,30,0.18)] lg:grid-cols-5">
         {KPIS.map((k, i) => (
-          <Reveal key={k.label} delay={i * 0.08} className="bg-white">
+          <Reveal key={k.label} delay={i * 0.08} className="bg-white last:col-span-2 lg:last:col-span-1">
             <div className="flex h-full flex-col justify-between gap-5 p-6 sm:p-7">
               <span className="font-mono text-[10px] uppercase leading-relaxed tracking-[0.22em] text-muted-foreground">
                 {k.label}
@@ -116,26 +116,26 @@ function AboutPreview() {
         <div>
           <Reveal>
             <h2 className="font-heading text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-ink sm:text-5xl">
-              From Field Execution to <span className="text-ember">Full EPC</span> Capability
+              From Field Execution <span className="text-ember">to EPC</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mt-7 text-base leading-relaxed text-ink/70 sm:text-lg">
-              Pushpalata Infratech Private Limited was established in 2014 and has developed extensive
-              practical experience in transmission-line execution through projects undertaken as a
-              subcontractor and execution partner.
+              Pushpalata Infratech Private Limited is an Indian infrastructure and power-transmission execution
+              company established in 2014. Over the years, the company has developed practical field experience
+              through transmission and infrastructure projects undertaken primarily as a subcontractor and
+              execution partner.
             </p>
             <p className="mt-4 text-base leading-relaxed text-ink/70">
-              Over the years, the company has contributed to high-voltage transmission infrastructure works
-              including foundation, tower erection, stringing and related field activities. Today, Pushpalata
-              Infratech is expanding its capabilities into full EPC execution, combining field execution
-              experience with project coordination, civil works, erection, stringing, testing and
-              commissioning activities.
+              Its capabilities include tower erection, foundation and civil works, conductor stringing,
+              re-conductoring, dismantling, transmission survey and associated substation works. Today, the
+              company is expanding this field-execution experience into full EPC delivery, combining practical
+              site knowledge with integrated project execution capabilities.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-9">
-              <CTALink to="/about" testId="about-preview-cta">Discover Our Journey</CTALink>
+              <CTALink to="/about" testId="about-preview-cta">Read Our Story</CTALink>
             </div>
           </Reveal>
         </div>
@@ -155,9 +155,9 @@ function AboutPreview() {
               <div className="relative">
                 <span className="font-mono text-xs tracking-[0.3em] text-ember">2025 – Present</span>
                 <h3 className="mt-3 font-heading text-xl font-extrabold uppercase tracking-tight text-paper">
-                  Full EPC Expansion
+                  Full EPC Execution
                 </h3>
-                <p className="mt-2 text-sm text-paper/65">Integrated transmission-line EPC execution</p>
+                <p className="mt-2 text-sm text-paper/65">Integrated Transmission EPC</p>
               </div>
               <span className="absolute -right-6 -top-6 h-24 w-24 rotate-45 bg-ember/90" />
             </div>
@@ -377,7 +377,7 @@ function CtaBand() {
             data-testid="cta-band-contact-button"
             className="group inline-flex items-center gap-2.5 rounded-full bg-white px-8 py-4 font-heading text-sm font-bold uppercase tracking-wider text-forest shadow-[0_12px_30px_rgba(0,0,0,0.15)] transition-[transform,background-color,color] duration-300 hover:-translate-y-0.5 hover:bg-forest hover:text-paper"
           >
-            Start a Project Discussion
+            Contact Us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </Reveal>
